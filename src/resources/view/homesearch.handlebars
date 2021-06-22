@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/vendor/open-iconic-master/font/css/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/Grid.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/fontawesome-free-5.15.2/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+    {{#if account}}{{> headerlogged}}{{else}}{{> headerlogandreg}}{{/if}}
+    <div class="app__container">
+    <div class="grid wide">
+        <div class="row sm-gutter app__content">
+            <div class="col l-2 m-0 c-0">
+                <nav class="category">
+                    <h3 class="category__heading">
+                        <i class="category__heading-icon fas fa-list"></i>
+                        Danh mục
+                    </h3>
+                    <ul class="category-list">
+                        <li class="category-item">
+                            <a href="/" class="category-item__link">Trang chủ</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="/phone" class="category-item__link">Điện Thoại</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="/laptop" class="category-item__link">Laptop</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="/accessories" class="category-item__link">Phụ Kiện</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col l-10 m-12 c-12">
+                <div class="home-filter hiden-on-mobile-tablet">
+                    <span class="home-filter__title">
+                        Sắp xếp theo
+                    </span>
+                    <form action="/sortname" method="POST">
+                        <button class="home-filter__btn btn" name="sortname" value="{{numsortname}}">
+                            Tên
+                        </button>
+                    </form>
+                    <form action="/latest" method="POST">
+                        <button class="home-filter__btn btn">
+                            Mới nhất
+                        </button>
+                    </form>
+                    <form action="/bestseller" method="POST">
+                        <button class="home-filter__btn btn">
+                            Bán chạy
+                        </button>
+                    </form>
+                    <form action="/sortprice" method="POST">
+                        <select name="pricessort" class="select-input" id="sortbyprices">
+                            <option value="0">Theo giá</option>
+                            <option value="1">Giá tăng dần</option>
+                            <option value="-1">Giá giảm dần</option>
+                        </select>
+                    </form>
+                    
+                    {{!-- <div class="home-filter__paginate">
+                        <span class="home-filter__paginate-number">
+                            <span class="home-filter__paginate-current">1</span>
+                            <span class="home-filter__paginate-total-page">/{{countProduct}}</span>
+                        </span>
+                        <div class="home-filter__paginate-control">
+                            <a href="" class="home-filter__paginate-btn home-filter__paginate-btn-disabled">
+                                <i class="home-filter__paginate-icon fas fa-angle-left"></i>
+                            </a>
+                            <a href="" class="home-filter__paginate-btn">
+                                <i class="home-filter__paginate-icon fas fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div> --}}
+                </div>
+                <div class="home-product">
+                    <div class="row sm-gutter">
+                        {{#each product}}
+                            <div class="col l-2-4 m-4 c-6">
+                                <a class="home-product-item" href="product/{{this.slug}}">
+                                    <div class="home-product-item__img" style="background-image: url({{this.image}});"></div>
+                                    <h4 class="home-product-item__name">
+                                        {{this.name}}
+                                    </h4>
+                                    <div class="home-product-item__price">
+                                        <span class="home-product-item__price-old">{{this.prices}}đ</span>
+                                        <span class="home-product-item__price-current">{{this.prices}}đ</span>
+                                    </div>
+                                    <div class="home-product-item__action">
+                                        <!-- add class home-product-item__like-liked for item is liked display -->
+                                        <span class="home-product-item__like ">
+                                            <i class="home-product-item__unlike far fa-heart"></i>
+                                            <i class="home-product-item__liked fas fa-heart"></i>
+                                        </span>
+                                        <div class="home-product-item__rating">
+                                            <i class="home-product-item__rating-star-1 home-product-item__rating-star fas fa-star"></i>
+                                            <i class="home-product-item__rating-star-2 home-product-item__rating-star fas fa-star"></i>
+                                            <i class="home-product-item__rating-star-3 home-product-item__rating-star fas fa-star"></i>
+                                            <i class="home-product-item__rating-star-4 home-product-item__rating-star fas fa-star"></i>
+                                            <i class="home-product-item__rating-star-5 home-product-item__rating-star fas fa-star"></i>
+                                        </div>
+                                        <div class="home-product-item__sale-off">
+                                            <span class="home-product-item__sale-off-percent">10%</span>
+                                            <span class="home-product-item__sale-off-label">GIẢM</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {{else}}
+                            <p style="text-align: center; font-size: 3rem; padding-left:16x">Không tìm thấy sản phẩm</p>
+                        {{/each}}
+                    </div>
+                </div>
+                <ul class="pagination home-product__pagintion" style="{{hidden}}" >
+                    <li class="pagination-item">
+                        <a href="?page={{priviouspage}}&historycontent={{historycontent}}" class="pagination-item__link">
+                            <i class="pagination-item__icon fas fa-angle-left"></i>
+                        </a>
+                    </li>
+                    {{{pagesearch countProduct historycontent}}}
+                    <li class="pagination-item">
+                        <a href="?page={{nextpage}}&historycontent={{historycontent}}" class="pagination-item__link">
+                            <i class="pagination-item__icon fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>  
+    </div>
+    {{> footer}}
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script>
+$("#sortbyprices").change(function (event) {
+    var formData = {
+      pricessort: $(this).children("option:selected").val(),
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "/sortprice",
+      data: formData,
+      dataType: "json",
+      encode: true,
+    })
+    $("form").submit();
+  });
+//chi hienthi luc click sau do mat
+$(".category-item").on("click",function(){
+    $(this).addClass('category-item--active');
+})
+//hien thi sau khi click va van ton tai
+$(document).ready(function() {
+	// get current URL path and assign 'active' class
+	var pathname = window.location.pathname;
+	$('.category-list > .category-item > a[href="'+pathname+'"]').parent().addClass('category-item--active');
+})
+//
+$(document).ready(function() {
+	// get current URL path and assign 'active' class
+	var pathname = window.location.pathname;
+	$('form[action="'+pathname+'"] > .home-filter__btn').addClass('btn--primary');
+    $('form[action="'+pathname+'"] > .select-input').attr('style','background-color: #fe6433;color:white')
+});
+</script>
+</html>

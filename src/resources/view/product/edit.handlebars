@@ -1,0 +1,32 @@
+{{> mainproduct}}
+<div class="mt-4">
+    <h3>Cập nhật thông tin sản phẩm</h3>
+    <form method="POST" action="/product/{{product._id}}?_method=PUT">
+        <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" value="{{product.name}}" id="name" placeholder="Nhập tên sản phẩm" name="name">
+        </div>
+        <div class="form-group">
+            <label for="discription">Giá sản phẩm</label>
+            <input type="text" class="form-control" id="prices" placeholder="Nhập giá sản phẩm" name="prices" value="{{product.prices}}">
+        </div>
+        <div class="form-group">
+            <label for="level">Hình ảnh</label>
+            <input type="text" class="form-control" value="{{product.image}}" id="image" placeholder="Nhập đường dẫn" name="image">
+        </div>
+         <div class="form-group">
+            <label for="imageproduct">Loại sản phẩm</label>
+            <select type="text" class="form-control" id="imageproduct" placeholder="Nhập đường dẫn" name="typeProduct">
+                <option {{checkValueSelected product.typeProduct 'phone'}} value="phone">Điện thoại</option>
+                <option {{checkValueSelected product.typeProduct 'laptop'}} value="laptop">Laptop</option>
+                <option {{checkValueSelected product.typeProduct 'accessories'}} value="accessories">Phụ kiện</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="imageproduct">Màu sản phẩm</label>
+            <input type="text" class="form-control" value="{{product.color}}" id="productcolor" placeholder="Nhập mỗi màu cách nhau bằng một dấu phẩy" name="color">
+        </div>
+        <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+    </form>
+</div>
+{{> endmainproduct}}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/product.css">
+    <link rel="stylesheet" href="/assets/css/cart.css">
+    <link rel="stylesheet" href="/assets/css/Grid.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5.15.2/css/all.min.css">
+</head>
+<body>
+    <div class="app">
+        {{#if account}}{{> headerlogged}}{{else}}{{> headerlogandreg}}{{/if}}
+        <div class="app__container">
+            <div class="grid wide">
+                <div class="row sm-gutter app__content">
+                    <div class="col l-2 m-0 c-0">
+                        <nav class="category">
+                            <h3 class="category__heading">
+                                <i class="category__heading-icon fas fa-list"></i>
+                                Danh mục
+                            </h3>
+                            <ul class="category-list">
+                                <li class="category-item category-item--active">
+                                    <a href="/phone" class="category-item__link">Điện Thoại</a>
+                                </li>
+                                <li class="category-item">
+                                    <a href="/laptop" class="category-item__link">Laptop</a>
+                                </li>
+                                <li class="category-item">
+                                    <a href="/accessories" class="category-item__link">Phụ Kiện</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col l-10 m-12 c-12">
+                        <form id="form-order-now" action="/product/processorder/{{product._id}}" method="post">
+                            <div class="order">
+                                <div class="middle__cart">
+                                    <ul class="list-cart">
+                                        <li class="list-cart-item">
+                                            <div class="list-cart-item-header">
+                                                <img src="{{product.image}}" alt="" class="list-cart-item-img">
+                                                <span class="list-cart-item-name">{{product.name}}</span>
+                                                <span class="list-cart-item-price">{{product.prices}}</span>
+                                            </div>
+                                            <div class="list-cart-item-color-amount">
+                                                {{{rendercolor product.color}}}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h2 id="totalprices" style="font-size:1.8rem; color:red;:"></h2>
+                                <div class="customer-information">
+                                    <div class="list-cart-item-customerinformation">
+                                        <div class="list-cart-item-customerinformation-header">
+                                            THÔNG TIN KHÁCH HÀNG:
+                                        </div>
+                                        <div class="list-cart-item-customerinformation-name auth-form__group">
+                                            <input type="text" name="customername" placeholder="Họ Và Tên" rules="required" class="input__customer-information">
+                                            <span class="form-message" style="color: red;"></span>
+                                        </div>
+                                        <div class="list-cart-item-customerinformation-contact auth-form__group">
+                                            <input type="text" name="phonenumber" placeholder="Số Điện Thoại" rules="required" class="input__customer-information">
+                                            <span class="form-message" style="color: red;"></span>
+                                        </div>
+                                        <div class="list-cart-item-customer-information-address">
+                                            <span id="address" class="textarea__customer-information" role="textbox" contenteditable style="margin:10px 0"></span>
+                                            <input type="hidden" id="input-address" name="address" value="">
+                                            <span id="idofaddress" style="color: red;"></span>
+                                        </div>
+                                        <div class="list-cart-item-customerinformation-total-price">
+                                            <input type="text" id="require" placeholder="Yêu Cầu Khác" class="input__customer-information" style="margin-top:10px">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-buy">ĐẶT HÀNG</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        {{> footer}}
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/validatior.js"></script>
+<script>
+    var form = new Validator("#form-order-now");
+    $('html').ready(function(){
+        var prices = $('.list-cart-item-price').text();
+        prices = Number(prices).toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND'
+        });
+        $('.list-cart-item-price').text(prices);
+        $('#totalprices').text('Tổng tiền: '+prices);
+
+    });
+    $('.is-form').click(function(){
+        var prices = $('.list-cart-item-price').text();
+        prices = Number(prices.replace(/[^0-9]/g,""));
+        var amount = Number($('.input-qty').val());
+        var result;
+        if($(this).hasClass('plus')){
+            result = (amount+1)*prices;
+        }
+        else{
+            if(amount>1) result = (amount-1)*prices;
+        }
+        $('#totalprices').text('Tổng tiền: '+result.toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND'
+        }));
+
+    })
+    $("#require").change(function (e){
+        $("#require").attr("name","require");
+    })
+    $('input.input-qty').each(function() {
+        var $this = $(this);
+        var qty = $this.parent().find('.is-form');
+        var amount =1;
+        $(qty).on('click', function() {
+            if ($(this).hasClass('minus')) {
+                if ($this.val() > 1) amount += -1;
+            } 
+            else if ($(this).hasClass('plus')) {
+                amount += 1;
+            }
+            $this.attr('value', amount).val(amount);
+        })
+    })
+    $('input.input-qty').on('change',function() {
+        var amount = Number($(this).val());
+        if(amount<1) amount=1;
+        var $this = $(this);
+        var qty = $this.parent().find('.is-form');
+        $(qty).on('click', function() {
+            if ($(this).hasClass('minus')) {
+                if(amount>1) amount-=1;
+            } else if ($(this).hasClass('plus')) {
+                amount += 1;
+            }
+            $this.attr('value', amount).val(amount)
+        })
+       
+    })
+    //do the span khong gui len duoc qua name va value
+    //nen phai gui nho 1 the input an co value la text cua the span
+    $("#address").blur(function (e){
+        var address = $("#address").text();
+        if(address=='') {
+            $('#idofaddress').text('Vui lòng nhập trường này');
+            $('.btn-buy').click(function(event){
+                event.preventDefault();
+            })
+        }
+        else{
+            $('#idofaddress').text('');
+            $('.btn-buy').unbind('click');
+        }
+        $("#input-address").val(address);
+    })
+    $('.btn-buy').click(function(event){
+        var address = $("#address").text();
+        if(address=='') {
+            $('#idofaddress').text('Vui lòng nhập trường này');
+            $('.btn-buy').click(function(event){
+                event.preventDefault();
+            })
+        }
+        else{
+            $('#idofaddress').text('');
+            $('.btn-buy').unbind('click');
+        }
+    })
+    $('#btn-order-in-cart').click(function(event){
+        var count=0;
+        var address = $("#address").text();
+        if($( "input:checked" ).val()=='new'){
+            var form = new Validator("#order-in-cart");
+            if(address==''){
+                var parentAddress = $("#address").parent();
+                var messageAddress = parentAddress.find('.form-message');
+                messageAddress.text('Vui lòng nhập trường này');
+                event.preventDefault();
+            }
+            else{
+                $('#btn-order-in-cart').unbind('click');
+            }
+            //xoa message khi co noi dung
+            //check khi vua nhap 1 khi tu
+            $('#address').on('DOMSubtreeModified',function(){
+                var address = $("#address").text();
+                var parentAddress = $("#address").parent();
+                var messageAddress = parentAddress.find('.form-message');
+                if(address!=''){
+                    messageAddress.text('');
+                }
+                else{
+                    messageAddress.text('Vui lòng nhập trường này');
+                }
+            })
+        }
+    })
+    
+</script>
+</html>

@@ -1,0 +1,104 @@
+.nav__product-header-link{
+    text-decoration: none;
+    font-size: 1.6rem;
+    margin-right:6px;
+    color: var(--primary-color);
+}
+.nav__product-next-icon{
+    margin-right: 6px;
+}
+.nav__product-name{
+    padding-top: 8px;
+    padding-bottom: 10px;
+    font-size: 2rem;
+    color: var(--text-color);
+    display:flex;
+}
+.nav__product-header-link--active{
+    color: var(--text-color);
+}
+.nav__product-name-num-rate{
+    font-size: 1.4rem;
+    color:var(--primary-color);
+}
+.nav__product-name span{
+    padding-right: 16px;
+}
+.detail-product-specifications-list{
+    list-style: none;
+    font-size: 1.4rem;
+    padding-left: 0;
+    margin-top: 0;
+}
+
+.detail-product-specifications-item{
+    display: table;
+    background:var(--white-color);
+    width: 100%;
+    border-top: 1px solid #eee;
+    padding: 5px 5px;
+    border-radius: 2px;
+}
+.detail-product-specifications-item-left{
+    display: table-cell;
+    width: 40%;
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+.detail-product-specifications-item-right{
+    display: table-cell;
+    width: auto;
+    padding: 5px 5px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+.detail-product-specifications-header{
+    font-size: 1.8rem;
+    padding-top: 10px;
+}
+.detail-product-grift-list{
+    list-style:none;
+    padding-left: 10px;
+}
+.detail-product-grift-item{
+    padding:5px;
+}
+.detail-product-grift-item a{
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    
+}
+.detail-product-grift{
+    font-size: 2rem;
+    color: red;
+}
+li.detail-product-grift-item:last-child{
+    padding-top: 10px;
+}
+.detail-product-buy{
+    margin-top: 20px;
+}
+.detail-product-buy-item{
+    background-color:var(--primary-color);
+    color: var(--white-color);
+    display: block;
+    text-align: center;
+}
+.detail-product-buy-item:hover{
+    background-color:rgb(250, 165, 38);
+}
+.home-product-item{
+    margin-top: 0;
+}
+.detail-product-container{
+    padding-top: 10px;
+    background-color: var(--white-color);
+    border-radius: 2px;
+}
+.detail-product-specifications-padding-top{
+    padding-top: 6px;
+}
+.detail-product-specifications{
+    background-color: var(--white-color);
+}

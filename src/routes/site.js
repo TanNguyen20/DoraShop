@@ -1,0 +1,17 @@
+const express = require('express');
+const router = express.Router();
+const sitecontroller = require('../app/controllers/SiteController');
+router.get('/search',sitecontroller.search);
+router.get('/sockets',sitecontroller.sockets);
+router.post('/product/:productid',sitecontroller.addproduct);
+router.get('/cart',sitecontroller.cart);
+router.post('/deleteproduct/:idslug',sitecontroller.deleteproduct);
+router.get('/searchadmin',sitecontroller.searchadmin);
+router.get('/phone',sitecontroller.phone);
+router.get('/laptop',sitecontroller.laptop);
+router.get('/accessories',sitecontroller.accessories);
+router.post('/sortprice',sitecontroller.sortprice);
+router.post('/latest',sitecontroller.latest);
+router.post('/sortname',sitecontroller.sortname);
+router.get('/',sitecontroller.testtoken,sitecontroller.privateUser);
+module.exports = router;

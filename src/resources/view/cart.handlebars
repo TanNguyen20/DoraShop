@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/product.css">
+    <link rel="stylesheet" href="/assets/css/cart.css">
+    <link rel="stylesheet" href="/assets/css/Grid.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5.15.2/css/all.min.css">
+</head>
+<body>
+    <div class="app">
+        {{#if account}}{{> headerlogged}}{{else}}{{> headerlogandreg}}{{/if}}
+        <div class="app__container">
+            <div class="test">
+                <div class="grid wide">
+                    <div class="row sm-gutter app__content">
+                        <div class="col l-2 m-0 c-0">
+                            <nav class="category">
+                                <h3 class="category__heading">
+                                    <i class="category__heading-icon fas fa-list"></i>
+                                    Danh mục
+                                </h3>
+                                <ul class="category-list">
+                                    <li class="category-item category-item--active">
+                                        <a href="#" class="category-item__link">Điện Thoại</a>
+                                    </li>
+                                    <li class="category-item">
+                                        <a href="#" class="category-item__link">Laptop</a>
+                                    </li>
+                                    <li class="category-item">
+                                        <a href="#" class="category-item__link">Phụ Kiện Điện Thoại</a>
+                                    </li>
+                                    <li class="category-item">
+                                        <a href="#" class="category-item__link">Phụ Kiện Laptop</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col l-10 m-12 c-12">
+                                <div class="middle__cart">
+                                    <ul class="list-cart">
+                                        {{{renderPageCart cart}}}
+                                    </ul>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+        {{> footer}}
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/validatior.js"></script>
+<script>
+    //xoa san pham trong cart
+    var countElement=0;
+    $('.list-cart-item-color').each(function(){
+        countElement++;
+    })
+    $(".delete-button").click(function(e){
+        e.preventDefault();
+        if(countElement>0){
+            var idProduct = $(this).attr('href');
+            var str = "a[href="+idProduct+"]";
+            $.post("/deleteproduct/"+idProduct,function(data, status){
+                if(data=='1'){
+                    var prices = $(str).parent().parent().parent().children().children('input[name="productprices"]').val();
+                    var totalprices = $('#totalprices').text().replace(/[^0-9]/g,"");
+                    totalprices =Number(totalprices)-Number(prices);
+                    totalprices=totalprices.toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    });
+                    $('#totalprices').text('Tổng tiền: '+totalprices);
+                    $(str).parent().parent().parent().remove();
+                    countElement--;
+                    if(countElement==0) $('.order').html(`<p style="font-size:3rem;padding-left:16px;">Không có sản phẩm trong giỏ hàng</p>`); 
+                }
+                
+            })
+        }
+        else{
+            $('.order').html(`<p style="font-size:3rem;padding-left:16px;">Không có sản phẩm trong giỏ hàng</p>`);
+        }
+    })
+    //
+    $('.is-form').on("click",function() {
+
+        var $this = $(this);
+        var qty = $this.parent().find('.input-qty');
+        var d = Number((qty).val());
+        var listCartItem = $this.parent().parent().parent().parent();
+        var listCartItemPrice = listCartItem.find('.list-cart-item-price');
+        var result = listCartItemPrice.text();
+        //lay ra tat ca ki tu so trong chuoi
+        result = result.replace(/[^0-9]/g,"");
+        var newresult;
+        
+        if($this.hasClass("minus")){
+            if(d>1) {
+                (qty).attr('value',d-1).val(d-1);
+                newresult = (Number(result)/d)*((Number((qty).val())));
+                //thay doi noi dung khi value input thay doi
+                listCartItemPrice.text(newresult.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }));
+            }
+
+        }
+        if($this.hasClass("plus")){
+            (qty).attr('value',d+1).val(d+1);
+            newresult = (Number(result)/d)*(Number((qty).val()));
+            //thay doi noi dung khi value input thay doi
+            listCartItemPrice.text(newresult.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }));
+        }
+        //tinh tong tien
+        var totalPrices =0;
+        $(".list-cart-item-price").each(function(){
+            var result = $(this).text();
+            result = result.replace(/[^0-9]/g,"");
+            totalPrices+=Number(result);  
+        })
+        totalPrices = totalPrices.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                })
+        var textTotalPrices = 'Tổng tiền: ';
+        $('#totalprices').text(textTotalPrices+totalPrices);
+        //
+       
+    })
+    //
+    $('input.input-qty').on('change',function() {
+        //lay gia tri lan dau trong datbase
+        var valuePlaceholder = Number($(this).attr('placeholder'));
+        var amount = Number($(this).val());
+        var $this = $(this);
+        //nguoi dung nhap 0 thi thay bang 1
+        if(Number($this.val())<1) $this.attr('value','1').val('1');
+        var qty = $this.parent().find('.is-form');
+        //
+        var listCartItem = $this.parent().parent().parent().parent();
+        var listCartItemPrice = listCartItem.find('.list-cart-item-price');
+        var result = listCartItemPrice.text();
+        //lay ra tat ca ki tu so trong chuoi
+        result = result.replace(/[^0-9]/g,"");
+        var newresult;
+        newresult = (Number(result)/valuePlaceholder)*Number($this.val());
+        $(this).attr('placeholder',$this.val()).val($this.val());
+        //thay doi noi dung khi value input thay doi
+        listCartItemPrice.text(newresult.toLocaleString('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        }));
+        //
+        $(qty).on('click', function() {
+            if ($(this).hasClass('minus') && amount>1) {
+                amount-=1;
+                
+            } else if ($(this).hasClass('plus')) {
+                amount += 1;
+                
+            }
+            $this.attr('value', amount).val(amount);
+            newresult = (Number(result)/valuePlaceholder)*Number(amount);
+            $this.attr('placeholder',$this.val()).val($this.val());
+            //thay doi noi dung khi value input thay doi
+            listCartItemPrice.text(newresult.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }));
+            //tinh tong tien
+            var totalPrices =0;
+            $(".list-cart-item-price").each(function(){
+                var result = $(this).text();
+                result = result.replace(/[^0-9]/g,"");
+                totalPrices+=Number(result);  
+            })
+            totalPrices = totalPrices.toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    })
+            var textTotalPrices = 'Tổng tiền: ';
+            $('#totalprices').text(textTotalPrices+totalPrices);
+            //
+        });
+        //tinh tong tien
+        var totalPrices =0;
+        $(".list-cart-item-price").each(function(){
+            var result = $(this).text();
+            result = result.replace(/[^0-9]/g,"");
+            totalPrices+=Number(result);  
+        })
+        totalPrices = totalPrices.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                })
+        var textTotalPrices = 'Tổng tiền: ';
+        $('#totalprices').text(textTotalPrices+totalPrices);
+        //
+    })
+    
+    //do the span khong gui len duoc qua name va value
+    //nen phai gui nho 1 the input an co value la text cua the span
+    $("#address").blur(function (e){
+        var address = $("#address").text();
+        $("#input-address").val(address);
+    })
+    $('input[type="radio"]').click(function(){
+        var content = $('#checkinformation').text();
+        if(content){
+            if($(this).val()=='new'){
+                $('#checkinformation').text('');
+            }
+        }
+        else{
+            $('.form-message').text('');
+        }
+    });
+    $('#btn-order-in-cart').click(function(event){
+        var count=0;
+        var address = $("#address").text();
+        if($( "input:checked" ).val()=='new'){
+            var form = new Validator("#order-in-cart");
+            if(address==''){
+                var parentAddress = $("#address").parent();
+                var messageAddress = parentAddress.children('.form-message');
+                messageAddress.text('Vui lòng nhập trường này');
+                var form = new Validator("#order-in-cart");
+                //event.preventDefault();
+            }
+            else{
+                $('#btn-order-in-cart').unbind('click');
+            }
+            //xoa message khi co noi dung
+            //check khi vua nhap 1 khi tu
+            $('#address').on('DOMSubtreeModified',function(){
+                var address = $("#address").text();
+                var parentAddress = $("#address").parent();
+                var messageAddress = parentAddress.find('.form-message');
+                if(address!=''){
+                    messageAddress.text('');
+                }
+                else{
+                    messageAddress.text('Vui lòng nhập trường này');
+                }
+            })
+        }
+    })
+    
+    $("#require").change(function (e){
+        $("#require").attr("name","require");
+    })
+    //kiem tra dia chi mac dinh co hay chua
+     $('input[type="radio"]').click(function(){
+        if($(this).val()=='default'){
+            $.post("/user/checkinformation",function(data, status){
+                if(data!='1'){
+                    $("#checkinformation").html(data);
+                    $("#btn-order-in-cart").click(function(e){
+                        e.preventDefault();
+                    })
+                }
+                else{
+                    $("#checkinformation").html('');
+                }
+            });
+        }
+        else{
+            $("#btn-order-in-cart").unbind('click');
+            var form = new Validator("#order-in-cart");
+        }
+    });
+   
+</script>
+</html>

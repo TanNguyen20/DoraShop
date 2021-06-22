@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="/vendor/open-iconic-master/font/css/open-iconic-bootstrap.css">
+        <link rel="stylesheet" href="/css/fontawesome-free-5.15.2/css/all.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #fe6433;">
+                <div class="container">
+                    <a class="navbar-brand" href="/me/stored/product"><img src="https://www.downloadclipart.net/large/doraemon-transparent-png.png" alt="" style="width: 60px;height:60px;">Cửa hàng điện tử dora</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/me/stored/product">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="https://fullstack.edu.vn/assets/images/nobody_m.256x256.jpg" alt="" class="user-avatar">
+                                    admin
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link dropdown-toggle" href="/me/ordermanagement" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Đơn hàng
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="/me/status0">Đơn hàng chưa xác nhận</a>
+                                        <a class="dropdown-item" href="/me/status1">Đơn hàng đã xác nhận</a>
+                                        <a class="dropdown-item" href="/me/status2">Đơn hàng đã hoàn thành</a>
+                                        <a class="dropdown-item" href="/me/status-1">Đơn hàng khách muốn hủy</a>
+                                    </div>
+                                    <a class="dropdown-item" href="/me/statistical">Thống kê doanh thu</a>
+                                    <a class="dropdown-item" href="/product/create">Thêm sản phẩm mới</a>
+                                    <a class="dropdown-item" href="/me/stored/product">Danh sách sản phẩm đã thêm</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/user/Logout">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <form  action="/searchadmin" method="GET" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Nhập sản phẩm" name='historycontent' aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+                
+            </div>
+            <form class="mt-4" name="container-form" method="POST" action="/order/handle-form-actions">
+                <div class="">
+                    <h3>Danh sách đơn hàng đã xác nhận</h3>
+                    <a href="/me/status2"><i class="fas fa-tasks"></i> Đơn hàng đã hoàn thành ({{countSoftDelete}})</a>
+                </div>
+                
+                <div class="mt-4 d-flex align-items-center">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
+                    <label class="form-check-label" for="checkbox-all">
+                        Chọn tất cả
+                    </label>
+                    </div>
+                    <select class="form-control form-control-sm checkbox-select-all-options" name="action" required>
+                        <option value="">---Xác nhận---</option>
+                        {{!-- <option value="delete">Xác nhận</option> --}}
+                    </select>
+                    <button class="btn btn-primary btn-sm btn-check-all-submit" disabled>Thực hiện</button>
+                </div>
+                
+                <table class="table mt-4 table-responsive table-hover">
+                    <thead>
+                        <tr class="table-info">
+                            <th scope="col" colspan="2">#</th>
+                            <th scope="col">
+                            Tên khách hàng
+                            {{{sortable 'customername' _sort}}}
+                            </th>
+                            <th scope="col" colspan="2">
+                                Thời gian đặt hàng
+                                {{{sortable 'createdAt' _sort}}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each order}}
+                        <tr>
+                            <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="orderId" value="{{this._id}}">
+                            </div>
+                            </td>
+                            <th scope="row">{{sum @index 1}}</th>
+                            <td>{{this.customername}}</td>
+                            <td>{{this.createdAt}}</td>
+                            <td>
+                                <a href="/me/detail/{{this._id}}" class="btn btn-link" style="padding-top:0;">Xem chi tiết</a>
+                                <a href="button"  data-id="{{this._id}}" class="btn btn-link" data-toggle="modal" data-target="#delete-order-modal" style="padding-top:0;">Hoàn thành</a>
+                            </td>
+                        </tr>
+                        {{else}}
+                        <td colspan="5" class="text-center">Bạn chưa có đơn hàng mới.</td>
+                        {{/each}}
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link" href="?page={{priviouspage}}">Previous</a></li>
+                        {{{pageadmin countOrder}}}
+                        <li class="page-item"><a class="page-link" href="?page={{nextpage}}">Next</a></li>
+                    </ul>
+                </nav>
+            </form>
+            {{!Xac nhan don hang}}
+            <div class="modal fade" id="delete-order-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Hoàn thành đơn hàng</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Bạn có chắc muốn hoàn thành đơn này?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                        <button id="btn-delete-order" type="button" class="btn btn-danger">Xác nhận</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <form name="delete-order-form" method="POST"></form>
+        </div>
+    </body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        var deleteForm=document.forms['delete-order-form'];
+        var btnDeleteOrder = document.getElementById('btn-delete-order');
+        var checkboxAll= $('#checkbox-all');
+        var courseItemCheckbox = $('input[name="orderId"]');
+        var checkAllSubmitBtn = $('.btn-check-all-submit');
+        //var containerForm=document.forms['container-form'];
+
+        var containerForm=$('form[name="container-form"]');
+        //console.log(containerForm);
+        $('#delete-order-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            orderId = button.data('id')
+        })
+        btnDeleteOrder.onclick = function(){
+            deleteForm.action='/me/changestatus2/'+orderId;
+            deleteForm.submit();
+        }
+        //check tat ca khi nhan button checkboxAll
+        checkboxAll.change(function(){
+        var isCheckedAll =$(this).prop('checked');
+        courseItemCheckbox.prop('checked',isCheckedAll);
+        renderCheckAllSubmitBtn();
+        });
+        //bo chon tat ca khi co 1 nut khong checked
+        courseItemCheckbox.change(function(){
+        var isCheckedAll= courseItemCheckbox.length === $('input[name="orderId"]:checked').length;
+        checkboxAll.prop('checked',isCheckedAll);
+        renderCheckAllSubmitBtn();
+        });
+        //Kiem tra all submit duoc clicked
+    
+        containerForm.on('submit',function(e){
+        var isSubmitable = !checkAllSubmitBtn.hasClass('disabled');
+        if(!isSubmitable){
+            e.preventDefault();
+        }
+        });
+        //kiem tra co check all hay khong de enable delete
+        function renderCheckAllSubmitBtn(){
+
+        var checkedCount = $('input[name="orderId"]:checked').length;
+        console.log(checkedCount);
+        if(checkedCount>0){
+            checkAllSubmitBtn.attr('disabled',false);
+        }
+        else{
+            checkAllSubmitBtn.attr('disabled',true);
+        }
+        //console.log(containerForm);
+        }
+        
+    });
+    
+
+</script>
+</html>

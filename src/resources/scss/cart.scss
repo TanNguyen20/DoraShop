@@ -1,0 +1,104 @@
+.order{
+    background-color:var(--white-color);
+    width:100%;
+}
+.list-cart-item-img{
+    width:60px;
+    height:60px;
+    flex:1;
+}
+.btn-buy{
+    color: var(--white-color);
+    background-color:var(--primary-color);
+    width: 40%;
+}
+.btn-buy:hover{
+    color: var(--white-color);
+    background-color:rgb(250, 165, 38);
+}
+.order{
+    padding:20px 40px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+.list-cart{
+    padding-left: 0;
+}
+.list-cart-item{
+    list-style:none;
+    font-size: 1.4rem;
+    
+}
+.list-cart-item-header{
+    display:flex;
+    font-size: 1.8rem;
+    justify-content:space-between;
+    align-items: center;
+}
+.list-cart-item-color-amount{
+    display: flex;
+    justify-content: space-between;
+}
+.list-cart-item-name{
+    flex:12;
+}
+.list-cart-item-price{
+    flex:1;
+}
+.list-cart-item-amount-icon{
+    font-size:2rem;
+    color:var(--primary-color);
+}
+.list-cart-item-amount-input{
+    outline:none;
+    text-align:center;
+    width:30px;
+    border:1px solid var(--primary-color);
+    border-radius:2px;
+}
+.list-cart-item-customerinformation-name-contact{
+    padding-top: 10px;
+    padding-bottom:10px;
+}
+.list-cart-item-customer-information-address{
+    padding-bottom: 10px;
+}
+.input__customer-information{
+    outline:none;
+    border:1px solid var(--primary-color);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 2px;
+    min-width: 40%;
+    max-width: 50%;
+}
+.list-cart-item-customerinformation-header{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.input__customer-information:hover{
+    box-shadow:0 1px 2px var(--primary-color);
+}
+.list-cart-item-color-amount{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#item-color{
+    outline:none;
+    border:1px solid var(--primary-color);
+    border-radius: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.list-cart-item-customerinformation-sex{
+    display: flex;
+    align-items: center;
+    
+}
+.male-sex{
+    padding-right: 5px;
+}
+.female-sex{
+    padding-left: 20px;
+    padding-right: 5px;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/product.css">
+    <link rel="stylesheet" href="/assets/css/cart.css">
+    <link rel="stylesheet" href="/assets/css/user.css">
+    <link rel="stylesheet" href="/assets/css/Grid.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5.15.2/css/all.min.css">
+</head>
+<body>
+    <div class="app">
+        {{#if account}}{{> headerlogged}}{{else}}{{> headerlogandreg}}{{/if}}
+        <div class="app__container">
+            <div class="grid wide">
+                <div class="row sm-gutter app__content">
+                    <div class="col l-2 m-0 c-0">
+                        <nav class="category">
+                            <h3 class="category__heading">
+                                <i class="category__heading-icon fas fa-list"></i>
+                                Danh mục
+                            </h3>
+                            <ul class="category-list">
+                                <li class="category-item ">
+                                    <a href="/" class="category-item__link">Trang chủ</a>
+                                </li>
+                                <li class="category-item">
+                                    <a href="/user/myorders" class="category-item__link">Chờ xác nhận</a>
+                                </li>
+                                <li class="category-item">
+                                    <a href="/user/myorderswaitconfirm" class="category-item__link">Đã xác nhận</a>
+                                </li>
+                                <li class="category-item category-item--active">
+                                    <a href="/user/myordersfinished" class="category-item__link">Đã hoàn thành</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col l-10 m-12 c-12">
+                        <div class="wrap-customer-information">
+                            <h2>Danh sách đơn hàng đã hoàn thành</h2>
+                            {{#if myorder}} 
+                                {{{rendertable myorder myorderdetail}}}  
+                            {{else}} 
+                                <p>Chưa có đơn hàng được giao thành công.</p>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <footer class="footer">
+            <div class="grid wide footer__mobile">
+                <div class="row">
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Chăm sóc khách hàng</h3>
+                        <ul class="footer__list">
+                            <li class="footer__list-item">
+                                <a href="" class="footer__list-item-link">Mail</a>
+                            </li>
+                            <li class="footer__list-item">
+                                <a href="" class="footer__list-item-link">
+                                    Trung tâm trợ giúp
+                                </a>
+                            </li>
+                            <li class="footer__list-item">
+                                <a href="" class="footer__list-item-link">
+                                    Hướng dẫn mua hàng
+                                </a>
+                            </li>   
+                        </ul>
+                    </div>
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Giới thiệu</h3>
+                        <ul class="footer__list">
+                            <li class="footer__list-item">
+                                <a href="" class="footer__list-item-link">
+                                    Giới thiệu
+                                </a>
+                            </li>
+                            <li class="footer__list-item">
+                                <a href="" class="footer__list-item-link">Tuyển dụng</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Theo dõi</h3>
+                        <li class="footer__list-item">
+                            <a href="" class="footer__list-item-link">
+                                <i class="footer__list-item-link-logo fab fa-facebook-square"></i>
+                                Facebook
+                            </a>
+                        </li>
+                        <li class="footer__list-item">
+                            <a href="" class="footer__list-item-link">
+                                <img class="footer__list-item-link-logo footer__list-item-link-logo-zalo" src="/assets/img/zalo-seeklogo.com.svg" alt="logo zalo image">
+                                Zalo
+                            </a>
+                        </li>
+                        <li class="footer__list-item">
+                            <a href="" class="footer__list-item-link">
+                                <i class="footer__list-item-link-logo fab fa-twitter-square"></i>
+                                Twitter
+                            </a>
+                        </li>
+                    </div>
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">
+                            Điều khoản
+                        </h3>
+                        <li class="footer__list-item">
+                            <a href="" class="footer__list-item-link">
+                                Điều khoản & điều kiện
+                            </a>
+                        </li>
+                        <li class="footer__list-item">
+                            <a href="" class="footer__list-item-link">
+                                Chính sách pháp lý
+                            </a>
+                        </li>
+                        <li class="footer__list-item">
+                            <a href="" class="footer__list-item-link">
+                                Chính Sách Bảo Mật
+                            </a>
+                        </li>
+                        
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+</html>

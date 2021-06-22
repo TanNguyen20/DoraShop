@@ -1,0 +1,110 @@
+<header class="header">
+    <div class="grid wide">
+        <nav class="header__navbar hiden-on-mobile-tablet">
+            <ul class="header__navbar-list">
+                <li class="header__navbar-item header__navbar-item--separate">
+                    Vào cửa hàng trên ứng dụng Dora
+                </li>
+                <li class="header__navbar-item">
+                    Kết nối
+                    <a href="" class="header__navbar-icon-link">
+                        <i class="header__navbar-icon fab fa-facebook"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="header__navbar-list">
+                <li class="header__navbar-item">
+                    <a href="" class="header__navbar-item-link">
+                        Trợ giúp
+                        <i class="header__navbar-icon far fa-question-circle"></i>
+                    </a>
+                </li>
+                <!-- Nut dang ki va dang nhap khi chua dang nhap vao tai khoan -->
+                
+                <li class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">
+                    <a href="/user/Register" class="header__navbar-item-link" id="render-register">Đăng kí</a>
+                </li>
+                <li class="header__navbar-item header__navbar-item--strong ">
+                    <a href="/user/Login" class="header__navbar-item-link" id="render-login">Đăng nhập</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- header search-->
+        <div class="header__search-logo-cart">
+
+            <label for="mobile-input" class="header__mobile-list">
+                <i class="mobile-list-item-logo fas fa-bars"></i>
+            </label>
+            <input type="checkbox" hidden name="" id="mobile-input" class="mobile-tablet-input">
+            <label for="mobile-input" class="header__overlay-mobile-tablet-list">
+                
+            </label>
+
+            <nav class="category__mobile">
+                <ul class="category__mobile-list">
+                    <!-- cai icon dau x dung chung nhung se an di tren mobile cho de nhin -->
+                    <label for="mobile-input" class="category__mobile-close-icon">
+                        <i class="fas fa-times"></i>
+                    </label>
+                    <li class="category__mobile-item">
+                        <a href="/" class="category__mobile-item-link">Trang chủ</a>
+                    </li>
+                    <li class="category__mobile-item">
+                        <a href="/user/Login" class="category__mobile-item-link">Đăng nhập</a>
+                    </li>
+                    <li class="category__mobile-item">
+                        <a href="/user/Register" class="category__mobile-item-link">Đăng ký</a>
+                    </li>
+                    <li class="category__mobile-item category__mobile-item--active">
+                        <a href="/phone" class="category__mobile-item-link">Điện Thoại</a>
+                    </li>
+                    <li class="category__mobile-item">
+                        <a href="/laptop" class="category__mobile-item-link">Laptop</a>
+                    </li>
+                    <li class="category__mobile-item">
+                        <a href="/accessories" class="category__mobile-item-link">Phụ Kiện</a>
+                    </li>
+                </ul>
+            </nav>
+            <label for="mobile-search-checkbox" class="header__mobile-search">
+                <i class="header__mobile-search-icon fas fa-search" style="position: absolute;top:21px"></i>
+            </label>
+            <div class="header__logo">
+                <a href="/" class="header__logo-link"><img src="https://www.downloadclipart.net/large/doraemon-transparent-png.png" alt="" class="header__logo-img">DORA</a>
+            </div>
+            <input type="checkbox" hidden id="mobile-search-checkbox" class="header__search-checkbox">
+            <div class="header__search hiden-on-mobile">
+                <div class="header__search-wrap">
+                    <form action="/search" method="GET" class="search-form">
+                        <input type="text" class="header__search-input" placeholder="Nhập sản phẩm tìm kiếm" name='historycontent'>
+                        <button class="header__search-btn">
+                            <i class="header__search-btn-icon fas fa-search"></i>
+                        </button>
+                    </form>
+                    {{!-- them vao form se lam cho ket qua tim kiem bi sai --}}
+                    <div class="header__search-history">
+                        <h3 class="header__search-history-heading">
+                            Lịch sử tìm kiếm
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="header__cart">
+                <div class="header__cart-hover">
+                    <a href="/user/Login" class="container__cart">
+                        <i class="header__cart-icon fas fa-shopping-cart"></i>
+                        <span class="header__cart-icon-notice">0</span>
+                    </a>
+                    <!-- No cart add class: header__cart-list--no-cart -->
+                    <div class="header__cart-list">
+                        <img src="/assets/img/no-cart.png" alt="" class="header__cart-no-cart-img">
+                        <p class="header__card-list-text-no-cart">
+                            Chưa có sản phẩm
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</header>

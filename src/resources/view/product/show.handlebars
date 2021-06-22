@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/vendor/open-iconic-master/font/css/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/assets/css/Grid.css">
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/fontawesome-free-5.15.2/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        {{#if accountname}}{{> headerlogged}}{{else}}{{> headerlogandreg}}{{/if}}
+        <div class="app__container">
+            <div class="grid wide">
+                <div class="row sm-gutter app__content">
+                    <div class="col l-2 m-0 c-0">
+                        <nav class="category">
+                            <h3 class="category__heading">
+                                <i class="category__heading-icon fas fa-list"></i>
+                                Danh mục
+                            </h3>
+                            <ul class="category-list">
+                                <li class="category-item category-item--active">
+                                    <a href="/phone" class="category-item__link">Điện Thoại</a>
+                                </li>
+                                <li class="category-item">
+                                    <a href="/laptop" class="category-item__link">Laptop</a>
+                                </li>
+                                <li class="category-item">
+                                    <a href="/accessories" class="category-item__link">Phụ Kiện</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col l-10 m-12 c-12">
+                        <div class="detail-product">
+                            <div class="nav__product">
+                                <div class="nav__product-header">
+                                    <a href="/" class="nav__product-header-link">Home</a>
+                                    <i class="nav__product-next-icon fas fa-chevron-right"></i>
+                                    <a href="" class="nav__product-header-link">{{product.typeProduct}}</a>
+                                    <i class="nav__product-next-icon fas fa-chevron-right"></i>
+                                    <a href="" class="nav__product-header-link nav__product-header-link--active">{{product.name}}</a>
+                                </div>
+                                <div class="nav__product-name">
+                                    <span style="line-height:2.4rem" class="product-name">{{product.name}}</span>
+                                    <div class="wrap-rating">
+                                        <span class="home-product-item__rating">
+                                            <i class="home-product-item__rating-star-1 home-product-item__rating-star fas fa-star"></i>
+                                            <i class="home-product-item__rating-star-2 home-product-item__rating-star fas fa-star"></i>
+                                            <i class="home-product-item__rating-star-3 home-product-item__rating-star fas fa-star"></i>
+                                            <i class="home-product-item__rating-star-4 home-product-item__rating-star fas fa-star"></i>
+                                            <i class="home-product-item__rating-star-5 home-product-item__rating-star fas fa-star"></i>
+                                        </span>
+                                        <span class="nav__product-name-num-rate">20 đánh giá</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row sm-gutter">
+                                <div class="detail-product-margin col l-4 m-12 c-12">
+                                    <a class="home-product-item" href="">
+                                        <div class="home-product-item__img" style="background-image: url({{product.image}});"></div>
+                                        <h1 style="color: red; text-align: center;padding:4px 0 16px 0" class="prices-product">Giá niêm yết {{convertcurrency product.prices}}</h1>
+                                    </a>
+                                </div>
+                                <div class="detail-product-margin col l-4 m-12 c-12">
+                                    <div class="detail-product-specifications">
+                                        <div class="detail-product-specifications-padding-top">
+                                            <ul class="detail-product-specifications-list">
+                                                <li class="detail-product-specifications-item"><span class="detail-product-specifications-header">Thông số kỹ thuật</span></li>
+                                                <li class="detail-product-specifications-item"><span class="detail-product-specifications-item-left">Màn hình:</span> <span class="detail-product-specifications-item-right">Dynamic AMOLED 2X, 6.8", Quad HD+ (2K+)</span> </li>
+                                                <li class="detail-product-specifications-item"><span class="detail-product-specifications-item-left">Hệ điều hành:</span> <span class="detail-product-specifications-item-right">Android 11</span> </li>
+                                                <li class="detail-product-specifications-item"><span class="detail-product-specifications-item-left">Camera trước:</span> <span class="detail-product-specifications-item-right">40 MP</span> </li>
+                                                <li class="detail-product-specifications-item"><span class="detail-product-specifications-item-left">Camera sau:</span> <span class="detail-product-specifications-item-right">Chính 108 MP & Phụ 12 MP, 10 MP, 10 MP</span> </li>
+                                                <li class="detail-product-specifications-item"><span class="detail-product-specifications-item-left">CPU:</span> <span class="detail-product-specifications-item-right">	Exynos 2100 8 nhân</span> </li>
+                                                <li class="detail-product-specifications-item"><span class="detail-product-specifications-item-left">RAM:</span> <span class="detail-product-specifications-item-right">12 GB</span> </li>
+                                                <li class="detail-product-specifications-item"><span class="detail-product-specifications-item-left">Bộ nhớ trong:</span> <span class="detail-product-specifications-item-right">128 GB</span> </li>
+                                                <li class="detail-product-specifications-item"><span class="detail-product-specifications-item-left">Thẻ SIM:</span> <span class="detail-product-specifications-item-right">	2 Nano SIM hoặc 1 Nano SIM + 1 eSIM, Hỗ trợ 5G</span> </li>
+                                                <li class="detail-product-specifications-item"><span class="detail-product-specifications-item-left">Dung lượng pin:</span> <span class="detail-product-specifications-item-right">5000 mAh, có sạc nhanh</span> </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="detail-product-margin col l-4 m-12 c-12">
+                                    <div class="detail-product-container">
+                                        <div class="detail-product-grift">
+                                            <i class="fas fa-gift"></i>Khuyến mãi
+                                        </div>
+                                        <ul class="detail-product-grift-list">
+                                            <li class="detail-product-grift-item">
+                                                <a href="">[HOT] Dùng thử S21 series - 14 ngày miễn phí đổi trả</a>
+                                            </li>
+                                            <li class="detail-product-grift-item">
+                                                <a href="">Thu cũ đổi mới lên đời S21 - Trợ giá tới 5 triệu đồng (có điều kiện kèm theo).</a>
+                                            </li>
+                                            <li class="detail-product-grift-item">
+                                                <a href="">Từ 26/2 : Bao da Samsung Galaxy S21 Ultra Clearview kèm S-Pen giảm ngay 40% chỉ còn 1.290.000đ</a>
+                                            </li>
+                                            <li class="detail-product-grift-item">
+                                                <a href="">Ưu đãi giảm 5 triệu đồng qua Galaxy Gift</a>
+                                            </li>
+                                        </ul>
+                                        <div class="detail-product-buy">
+                                            <a href="/product/order/{{product.slug}}" class="btn detail-product-buy-item">Mua ngay</a>
+                                            <p style="text-align:center; font-size:1.4rem; font-weight:bold">Hoặc</p>
+                                            <form id="add-product-to-cart-form" action="/product/{{product._id}}" method="post">
+                                                <button class="btn detail-product-buy-item" id="add-product-to-cart">Thêm vào giỏ hàng</button>
+                                            </form>
+                                            {{!-- <a href="/product/{{product._id}}" class="btn detail-product-buy-item" id="add-product-to-cart">Thêm vào giỏ hàng</a> --}}
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{> footer}}
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script>
+    $("#add-product-to-cart").click(function(e){
+        var price = $('.prices-product').text().split(' ')[3];
+        var name = $('.product-name').text();
+        var image = $('.home-product-item__img').attr('style');
+        image = image.split('url')[1].substring(1,image.split('url')[1].length-2);
+        var action=$("#add-product-to-cart-form").attr("action");
+        e.preventDefault();
+        var str="";
+        if($('.header__cart-list-items').html()){
+            str =$('.header__cart-list-items').html().split('</ul>');
+        }
+        var str1 =`<li class="header__cart-items">
+            <img src="${image}" alt="" class="header__cart-items-img">
+            <div class="header__cart-items-info">
+                <div class="header__cart-items-head">
+                    <h5 class="header__cart-items-name">${name}</h5>
+                    <div class="header__cart-items-price-wrap">
+                        <span class="header__cart-items-price">${price}</span>
+                        <span class="header__cart-items-multiply">x</span>
+                        <span class="header__cart-items-sl">1</span>
+                    </div>
+                </div>
+                <div class="header__cart-items-body">
+                    <span class="header__cart-items-description">Phân loại màu: Đen</span>
+                </div>
+            </div>
+          </li>`;
+        if(str==""){
+            str1=`<ul class="header__cart-list-items">`+str1+'</ul>'+`<a href="/cart" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>`;
+        }
+        $.post(action,function(data, status){
+            if(data!="0"){
+                $("#amount-product").html(data);
+                //gio hang rong
+                if(str==""){
+                    $('.header__cart-list').html(str1);
+                }
+                //neu gio hang khong rong
+                else {
+                    var f=0;//co ton tai san pham vua them hay khong
+                    var element;
+                    $('.header__cart-items-name').each(function(){
+                        if($(this).text()==name){
+                            f=1;
+                            element = $(this).parent().children('.header__cart-items-price-wrap').children('.header__cart-items-sl');
+                        }
+                        
+                    });
+                    //kiem tra them cung 1 san pham nhieu lan
+                    if(f==1){
+                        var currentval = element.text();
+                        element.text(Number(currentval)+1);
+                    }
+                    else{
+                        $('.header__cart-list-items').html(str+str1+'</ul>');
+                    }
+                }
+            }
+            //chua dang nhap chuyen sang trang login
+            else window.location.replace("/user/Login");
+        });
+    });
+</script>
+</html>

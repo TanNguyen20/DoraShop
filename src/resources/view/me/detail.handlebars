@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="/vendor/open-iconic-master/font/css/open-iconic-bootstrap.css">
+        <link rel="stylesheet" href="/css/fontawesome-free-5.15.2/css/all.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #fe6433;">
+                <div class="container">
+                    <a class="navbar-brand" href="/me/stored/product"><img src="https://www.downloadclipart.net/large/doraemon-transparent-png.png" alt="" style="width: 60px;height:60px;">Cửa hàng điện tử dora</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/me/stored/product">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="https://fullstack.edu.vn/assets/images/nobody_m.256x256.jpg" alt="" class="user-avatar">
+                                    admin
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link dropdown-toggle" href="/me/ordermanagement" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Đơn hàng
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="/me/status0">Đơn hàng chưa xác nhận</a>
+                                        <a class="dropdown-item" href="/me/status1">Đơn hàng đã xác nhận</a>
+                                        <a class="dropdown-item" href="/me/status2">Đơn hàng đã hoàn thành</a>
+                                    </div>
+                                    <a class="dropdown-item" href="/me/statistical">Thống kê doanh thu</a>
+                                    <a class="dropdown-item" href="/product/create">Thêm sản phẩm mới</a>
+                                    <a class="dropdown-item" href="/me/stored/product">Danh sách sản phẩm đã thêm</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/user/Logout">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <form  action="/searchadmin" method="GET" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Nhập sản phẩm" name='historycontent' aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+                
+            </div>
+            <div class="">
+                <h3>Chi tiết đơn hàng</h3>
+            </div>
+            
+            <table class="table mt-4 table-responsive table-hover">
+                <tbody>
+                    <tr>
+                        <th>Tên khách hàng</th>
+                        <td>{{order.customername}}</td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ</th>
+                        <td>{{order.address}}</td>
+                    </tr>
+                    <tr>
+                        <th>Số điện thoại</th>
+                        <td>{{order.phonenumber}}</td>
+                    </tr>
+                    <tr>
+                        <th>Yêu cầu của khách hàng</th>
+                        <td>{{order.require}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table mt-4 table-responsive table-hover">
+                    <thead>
+                        <tr class="table-info">
+                            <th scope="col" >#</th>
+                            <th scope="col">
+                                Tên sản phẩm
+                            </th>
+                            <th scope="col">
+                                Hình ảnh
+                            </th>
+                            <th scope="col" >
+                                Màu sản phẩm
+                            </th>
+                            <th scope="col" >
+                                Số lượng
+                            </th>
+                            <th scope="col" >
+                                Giá tiền
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each order.orderdetail}}
+                        <tr>
+                            <th scope="row">{{sum @index 1}}</th>
+                            <td>{{this.nameproduct}}</td>
+                            <td><img src="{{this.imageproduct}}" alt="" style="width: 60px;height: 60px;"></td>
+                            <td>{{this.color}}</td>
+                            <td>
+                                {{this.amountproduct}}
+                            </td>
+                            <td class="prices-in-admin">
+                                {{renderPrices this.pricesproduct}}
+                            </td>
+                        </tr>
+                        {{/each}}
+                        <h4 style="color: red;" id="total-prices-in-admin"></h4>
+                    </tbody>
+                </table>
+        </div>
+    </body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $('html').ready(function(){
+        var total =0;
+        $('.prices-in-admin').each(function(){
+            total+=Number($(this).text().replace(/[^0-9]/g,""));
+        })
+        $('#total-prices-in-admin').text('Tổng tiền: '+total.toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND'
+        }));
+    });
+</script>
+</html>
+

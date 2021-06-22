@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/Grid.css">
+    <link rel="stylesheet" href="/assets/css/checkedsubmit.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5.15.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="app">
+        {{> headerlogandreg}}
+        <div class="app__container">
+            <div class="grid wide">
+                <div class="modal">
+                <div class="modal__overlay"></div>
+                <div class="modal__body">
+                    <form action="/user/createaccount" method="POST" id="register-form">
+                        <div class="auth-form">
+                            <div class="auth-form__container">
+                                <div class="auth-form__header">
+                                    <h3 class="auth-form__heading">Đăng kí</h3>
+                                    <a class="auth-form__switch-btn" href="/user/Login">Đăng nhập</a>  
+                                </div>
+                                <div class="auth-form__form">
+                                    <div class="auth-form__group invalid">
+                                        <input type="text" id="username" class="auth-form__input" name="username" rules="required|min:6" placeholder="Nhập tên tài khoản">
+                                        <span id="checkname" class="form-message" style="font-size: 1.4rem; color: var(--primary-color);"></span>
+                                    </div>
+                                    <div class="auth-form__group">
+                                        <input type="password" class="auth-form__input" id="password" name="password" rules="required|min:8" placeholder="Mật khẩu">
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="auth-form__group">
+                                        <input type="password" class="auth-form__input" id="repassword" name="retype_password" rules="required|min:8|equal" placeholder="Nhập lại mật khẩu">
+                                        <span class="form-message"></span>
+                                    </div>
+                                </div>
+                                <div class="auth-form__extends">
+                                    <p class="auth-form__policy">
+                                        Bằng việc đăng kí, bạn đã đồng ý với Dora về
+                                        <a href="" class="auth-form__policy-link">Điều khoản dịch vụ và</a>
+                                        <a href="" class="auth-form__policy-link">Chính sách bảo mật</a>
+                                    </p>
+                                </div>
+                                <div class="auth-form__controls">
+                                    <button class="btn auth-form__controls-back">TRỞ LẠI</button>
+                                    <button class="btn btn--primary" id="register-button">ĐĂNG KÍ</button>
+                                </div>
+                            </div>
+                            <div class="auth-form__socials">
+                                <a href="" class="social__facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                    Kết nối với Facebook
+                                </a>
+                                <a href="" class="social__google">
+                                    <i class="fab fa-google"></i>
+                                    Kết nối với Google
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+        {{> footer}}
+    </div>
+
+    <!--Modal layout -->
+    
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/validatior.js"></script>
+<script>
+    var form = new Validator("#register-form");
+    $('.auth-form__controls-back').click(function(e){
+        e.preventDefault();
+        window.location='/';
+    })
+    $("#username").blur(function(){
+        var username =$("#username").val();
+        $.post("/user/checkusername",{checkUsername: username},function(data, status){
+            if(data!=="1"){
+                if(!$("#checkname").text()){
+                    $("#checkname").html(data);
+                    $("#register-button").click(function(e){
+                        e.preventDefault();
+                    })
+                }
+                
+            }
+            else{
+                if($("#checkname").text()=='Tài khoản này đã tồn tại'){
+                    $("#checkname").html("");
+                    $("#register-button").unbind("click");
+                }
+                
+            }
+        });
+    });
+    ;
+</script>
+</html>

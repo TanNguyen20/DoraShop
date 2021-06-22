@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/Grid.css">
+    <link rel="stylesheet" href="/assets/css/checkedsubmit.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5.15.2/css/all.min.css">
+</head>
+<body>
+    <div class="app">
+        {{> headerlogandreg}}
+        <div class="app__container">
+            <div class="grid wide">
+                <div class="modal">
+                    <div class="modal__overlay"></div>
+                    <div class="modal__body">
+                        <form action="/user/authentication" method="POST" id="login-form">
+                            <div class="auth-form">
+                                <div class="auth-form__container">
+                                    <div class="auth-form__header">
+                                        <h3 class="auth-form__heading">Đăng nhập</h3>
+                                        <a class="auth-form__switch-btn" href="/user/Register">Đăng kí</a>  
+                                    </div>
+                                    <div class="auth-form__form">
+                                        <div class="auth-form__group">
+                                            <input type="text" class="auth-form__input" name="username" rules="required" id="username" placeholder="Nhập tên tài khoản">
+                                            <span class="form-message"></span>
+                                        </div>
+                                        <div class="auth-form__group">
+                                            <input type="password" class="auth-form__input" name="password" rules="required" id="password" autocomplete="on" placeholder="Mật khẩu">
+                                            <span class="form-message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="auth-form__extends">
+                                        <div class="auth-form__help">
+                                        <a href="" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
+                                        <span class="auth-form__help-separate"></span>
+                                        <a href="" class="auth-form__help-link">Cần trợ giúp?</a>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="auth-form__controls">
+                                        <button class="btn auth-form__controls-back">TRỞ LẠI</button>
+                                        <button class="btn btn--primary" >ĐĂNG NHẬP</button>
+                                    </div>
+                                </div>
+                                <div class="auth-form__socials">
+                                    <a href="" class="social__facebook">
+                                        <i class="fab fa-facebook-f"></i>
+                                        Kết nối với Facebook
+                                    </a>
+                                    <a href="" class="social__google">
+                                        <i class="fab fa-google"></i>
+                                        Kết nối với Google
+                                    </a>
+                                </div>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+                
+        </div>
+        {{> footer}}
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/validatior.js"></script>
+<script>
+    var form = new Validator("#login-form");
+    $('.auth-form__controls-back').click(function(e){
+        e.preventDefault();
+        window.location='/';
+    })
+</script>
+</html>

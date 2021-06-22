@@ -1,0 +1,199 @@
+<header class="header">
+    <div class="grid wide">
+        <nav class="header__navbar hiden-on-mobile-tablet">
+            <ul class="header__navbar-list">
+                <li class="header__navbar-item header__navbar-item--separate">
+                    Vào cửa hàng trên ứng dụng Dora
+                </li>
+                <li class="header__navbar-item">
+                    Kết nối
+                    <a href="" class="header__navbar-icon-link">
+                        <i class="header__navbar-icon fab fa-facebook"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="header__navbar-list">
+                <li class="header__navbar-item header__navbar-item--has-notify">
+                    <a href="" class="header__navbar-item-link">
+                        Thông báo
+                        <i class="header__navbar-icon far fa-bell"></i>
+                    </a>
+                    <div class="header__notify">
+                        <header class="header_notify-header">
+                            <h3>Thông báo mới nhận</h3>
+                        </header>
+                        <ul class="header__notify-list">
+                            <li class="header__notify-item header__notify-item--viewed">
+                                <a href="" class="header__notify-link">
+                                    <img src="https://cdn.tgdd.vn/Products/Images/42/228738/iphone-12-pro-xam-new-600x600-600x600.jpg" alt="" class="header__notify-img">
+                                    <div class="header__notify-info">
+                                        <span class="header__notify-name">Điện thoại chính hãng</span>
+                                        <span class="header__notify-description">Mô tả điện thoại chính hãng,hàng chính hãng cứ yên tâm nhé mọi người</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="header__notify-item">
+                                <a href="" class="header__notify-link">
+                                    <img src="https://cdn.tgdd.vn/Products/Images/42/228738/iphone-12-pro-xam-new-600x600-600x600.jpg" alt="" class="header__notify-img">
+                                    <div class="header__notify-info">
+                                        <span class="header__notify-name">Điện thoại chính hãng</span>
+                                        <span class="header__notify-description">Mô tả điện thoại chính hãng</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="header__notify-item">
+                                <a href="" class="header__notify-link">
+                                    <img src="https://cdn.tgdd.vn/Products/Images/42/228738/iphone-12-pro-xam-new-600x600-600x600.jpg" alt="" class="header__notify-img">
+                                    <div class="header__notify-info">
+                                        <span class="header__notify-name">Điện thoại chính hãng</span>
+                                        <span class="header__notify-description">Mô tả điện thoại chính hãng</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="header__notify-item">
+                                <a href="" class="header__notify-link">
+                                    <img src="https://cdn.tgdd.vn/Products/Images/42/228738/iphone-12-pro-xam-new-600x600-600x600.jpg" alt="" class="header__notify-img">
+                                    <div class="header__notify-info">
+                                        <span class="header__notify-name">Điện thoại chính hãng</span>
+                                        <span class="header__notify-description">Mô tả điện thoại chính hãng</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <footer class="header__notify-footer">
+                            <a href="" class="header__notify-footer-btn">Xem tất cả</a>
+                        </footer>
+                    </div>
+                </li>
+                <li class="header__navbar-item">
+                    <a href="" class="header__navbar-item-link">
+                        Trợ giúp
+                        <i class="header__navbar-icon far fa-question-circle"></i>
+                    </a>
+                </li>
+                <li class="header__navbar-item header__navbar-user">
+                    <img src="https://fullstack.edu.vn/assets/images/nobody_m.256x256.jpg" alt="" class="header__navbar-user-img">
+                    <span class="header__navbar-user-name">{{accountname}}</span>
+                    <ul class="header__navbar-user-menu">
+                        <li class="header__navbar-user-menu-item">
+                            <a href="/user/information" class="">Tài khoản của tôi</a>
+                        </li>
+                        <li class="header__navbar-user-menu-item">
+                            <a href="/user/myorders" class="">Xem đơn hàng</a>
+                        </li>
+                        <li class="header__navbar-user-menu-item header__navbar-user-menu-item--separate">
+                            <a href="/user/Logout" class="">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- header search-->
+        <div class="header__search-logo-cart">
+
+            <label for="mobile-input" class="header__mobile-list">
+                <i class="mobile-list-item-logo fas fa-bars"></i>
+            </label>
+            <input type="checkbox" hidden name="" id="mobile-input" class="mobile-tablet-input">
+            <label for="mobile-input" class="header__overlay-mobile-tablet-list">
+                
+            </label>
+
+            <nav class="category__mobile">
+                <ul class="category__mobile-list">
+                    <!-- cai icon dau x dung chung nhung se an di tren mobile cho de nhin -->
+                    <label for="mobile-input" class="category__mobile-close-icon">
+                        <i class="fas fa-times"></i>
+                    </label>
+                    <li class="category__mobile-item">
+                        <a href="/" class="category__mobile-item-link">Trang chủ</a>
+                    </li>
+                    <li class="category__mobile-item">
+                        <a href="" class="category__mobile-item-link">{{accountname}}</a>
+                    </li>
+                    <li class="category__mobile-item">
+                        <a href="/user/information" class="category__mobile-item-link">Tài khoản của tôi</a>
+                    </li>
+                    <li class="category__mobile-item category__mobile-item--active">
+                        <a href="/phone" class="category__mobile-item-link">Điện Thoại</a>
+                    </li>
+                    <li class="category__mobile-item">
+                        <a href="/laptop" class="category__mobile-item-link">Laptop</a>
+                    </li>
+                    <li class="category__mobile-item">
+                        <a href="/accessories" class="category__mobile-item-link">Phụ Kiện</a>
+                    </li>
+                    </li>
+                </ul>
+            </nav>
+            <label for="mobile-search-checkbox" class="header__mobile-search">
+                <i class="header__mobile-search-icon fas fa-search"></i>
+            </label>
+            <div class="header__logo">
+                <a href="/" class="header__logo-link"><img src="https://www.downloadclipart.net/large/doraemon-transparent-png.png" alt="" class="header__logo-img">DORA</a>
+            </div>
+            <input type="checkbox" hidden id="mobile-search-checkbox" class="header__search-checkbox">
+            <div class="header__search hiden-on-mobile">
+                <div class="header__search-wrap">
+                    <div class="header__search-wrap">
+                        <form action="/search" method="GET" class="search-form">
+                            <input type="text" class="header__search-input" placeholder="Nhập sản phẩm tìm kiếm" name='historycontent'>
+                            <button class="header__search-btn">
+                                <i class="header__search-btn-icon fas fa-search"></i>
+                            </button>
+                        </form>
+                        {{!-- them vao form se lam cho ket qua tim kiem bi sai --}}
+                        <div class="header__search-history">
+                            <h3 class="header__search-history-heading">
+                                Lịch sử tìm kiếm
+                            </h3>
+                            <ul class="header__search-history-list">
+                                {{#each historydata}}
+                                <li class="header__search-history-items">
+                                    <a href="/search?historycontent={{this}}">{{this}}</a>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header__cart">
+                <div class="header__cart-hover">
+                    <i class="header__cart-icon fas fa-shopping-cart"></i>
+                    <span class="header__cart-icon-notice" id="amount-product">{{totalproduct cart}}</span>
+                    <!-- No cart add class: header__cart-list--no-cart -->
+                    <div class="header__cart-list">
+                        <!-- Cart items -->
+                        {{{renderCartInHeader cart}}}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div> 
+    {{!-- <div class="home-filter hiden-on-laptop" style="background-color: rgb(226, 226, 226);"> 
+        <form action="/sortname" method="POST">
+            <button class="home-filter__btn btn" name="sortname" value="{{numsortname}}">
+                Tên
+            </button>
+        </form>
+        <form action="/latest" method="POST">
+            <button class="home-filter__btn btn">
+                Mới nhất
+            </button>
+        </form>
+        <form action="/bestseller" method="POST">
+            <button class="home-filter__btn btn best-seller">
+                Bán chạy
+            </button>
+        </form>
+        <form action="/sortprice" method="POST">
+            <select name="pricessort" class="select-input sortbyprices-in-mobile">
+                <option value="0">Giá</option>
+                <option value="1">Giá tăng dần</option>
+                <option value="-1">Giá giảm dần</option>
+            </select>
+        </form>
+    </div> --}}
+</header>

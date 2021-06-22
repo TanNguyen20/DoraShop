@@ -1,0 +1,12 @@
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  margin-left: 4px;
+  border-radius: 50%; }
+
+.card-course-item {
+  margin-top: 16px; }
+
+.checkbox-select-all-options {
+  width: 150px;
+  margin: 0 10px; }

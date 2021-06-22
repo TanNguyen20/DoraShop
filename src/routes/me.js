@@ -1,0 +1,20 @@
+const express = require('express');
+const router = express.Router();
+const mecontroller = require('../app/controllers/MeController');
+ 
+router.get('/stored/courses',mecontroller.storedCourses);
+router.get('/ordermanagement',mecontroller.ordermanagement);
+router.get('/detail/:orderid',mecontroller.detail);
+router.get('/stored/product',mecontroller.checkadmin, mecontroller.storedProduct);
+router.get('/trash/courses',mecontroller.checkadmin,mecontroller.trashCourses);
+router.get('/trash/product',mecontroller.trashProduct);
+router.get('/trash/order',mecontroller.trashOrder);
+router.get('/status1',mecontroller.checkadmin,mecontroller.status1);
+router.get('/status0',mecontroller.checkadmin,mecontroller.status0);
+router.get('/status2',mecontroller.checkadmin,mecontroller.status2);
+router.get('/status-1',mecontroller.checkadmin,mecontroller.statusnegative1);
+router.get('/statistical',mecontroller.checkadmin,mecontroller.statistical);
+router.post('/changestatus1/:idorder',mecontroller.checkadmin,mecontroller.changestatus1);
+router.post('/changestatus2/:idorder',mecontroller.checkadmin,mecontroller.changestatus2);
+router.post('/changestatusnegative2/:idorder',mecontroller.checkadmin,mecontroller.changestatusnegative2);
+module.exports = router;

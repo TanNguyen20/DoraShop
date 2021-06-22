@@ -1,0 +1,206 @@
+/* mobile and tablet */
+
+@media (max-width:1023px){
+    :root{
+        --header-height:70px;
+        --navbar-height:0px;
+
+    }
+    .header__cart{
+        z-index: 0;
+        margin-right: 10px;
+    }
+    .header{
+        position:fixed;
+        top:0;
+        right:0;
+        left:0;
+        z-index: 10;
+    }
+    .hiden-on-mobile-tablet{
+        display:none;
+    }
+    .header__cart-list{
+        position: fixed;
+        top: var(--header-height);
+        right:0;
+        width:100%;
+        padding:0 calc((100% - 644px) / 2);
+    }
+    .header__cart-list::after{
+        display:none;
+    }
+    .header__sort-item--active .header__sort-link{
+        color: var(--primary-color);
+    }
+    .app__container{
+        margin-top: calc(var(--header-height) + var(--header__sort-bar-height));
+    }
+    .header__sort-bar{
+        display:flex;
+        height:calc(2px + var(--header__sort-bar-height));
+        /* bi an khi co lop overlay */
+        z-index: -1;
+
+    }
+    /* de an khi bam vao icon list */
+  
+    .header__overlay-mobile-tablet-list{
+        position:fixed;
+        display: none;
+        top:0;
+        right:0;
+        left:0;
+        bottom:0;
+        z-index:1;
+        background-color:rgba(0,0,0,0.5);
+    }
+    .header__mobile-list{
+        display:block;
+    }
+    
+    .category__mobile-list{
+       list-style:none;
+    }
+    
+    .category__mobile-item{
+        
+    }
+    
+    .category__mobile-item-link{
+        text-decoration:none;
+        color:var(--text-color);
+        display:block;
+        line-height:5rem;
+        font-size: 2rem;
+    }
+    .header__mobile-search-icon{
+        font-size: 2.2rem;
+        color: var(--white-color);
+    }
+
+    .mobile-tablet-input:checked ~ .header__overlay-mobile-tablet-list{
+        display: block;
+    }
+    .mobile-tablet-input:checked ~ .category__mobile{
+        transform: translateX(0);
+        display:block;
+    }
+    /* z-index nav va sort */
+    .header{
+        z-index: 1;
+    }
+
+    /* cach thanh phan footer */
+    .detail-product-margin{
+        margin-bottom: 10px;
+    }
+}
+
+
+/* tablet display */
+@media (min-width:740px) and (max-width:1023px){
+    .hiden-on-tablet{
+        display:none;
+    }
+    .category__mobile{
+        background-color: aqua;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        top:0;
+        width: 50%;
+        z-index: 1;
+        display: none;
+    }
+}
+
+
+/* mobile display */
+@media (max-width:739px){
+    .hiden-on-mobile{
+        display:none;
+    }
+    .header__search-logo-cart{
+        justify-content:space-between;
+    }
+    .header__cart,
+    .header__logo{
+        width:unset;
+    }
+    .header__mobile-search{
+        display:block;
+        padding-left: 0;
+        /* z-index: 1; */
+    }
+    .header__search{
+        position: fixed;
+        z-index: 1;
+        top:var(--header-height);
+        left:0;
+        right: 0;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        height:46px;
+        padding:0 16px;
+        animation: mobileSearchSideIn linear 0.3s;
+        display:none;
+    }
+    .header__search-btn{
+        margin-top:5px;
+    }
+    .header__search-history{
+        position:fixed;
+        width:100%;
+        padding-top:1px;
+        top:calc(var(--header-height) + var(--header__sort-bar-height));
+        box-shadow: none;
+    }
+    .pagination-item{
+        margin:0 2px;
+    }
+    .pagination-item__link{
+        height:28px;
+        min-width:38px;
+    }
+    .app__content{
+        margin:0 4px;
+    }
+    .category__mobile{
+        background-color: aqua;
+        position: absolute;
+        width: 100%;
+        display: none;
+        z-index: 10;
+        top:0;
+    }
+    .footer__mobile{
+        padding-left: 16px;
+    }
+    .footer__heading{
+        text-align: center;
+    }
+    .footer__list-item-link{
+        justify-content:center;
+    }
+    .footer__list-item-link-logo {
+        position: absolute;
+        justify-content:center;
+        left: 55px;
+    }
+    @keyframes mobileSearchSideIn {
+        from{
+            opacity: 0;
+            top:calc(var(--header-height) / 2);
+            transform: scale(0);
+        }
+        to{
+            opacity: 1;
+            top:var(--header-height);
+            transform: scale(1);
+        }
+    }
+    .auth-form {
+        width: 100%;
+        overflow: hidden;
+    }
+}
