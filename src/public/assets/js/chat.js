@@ -1,6 +1,6 @@
 $(function () {
     //Kết nối tới server socket đang lắng nghe
-    var port=process.env.PORT+1;
+    var port=23456;
     var socket = io.connect('http://nienluan2021.herokuapp.com:'+port+'/sockets');
 
     //Socket nhận data và append vào giao diện

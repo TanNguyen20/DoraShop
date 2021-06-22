@@ -335,7 +335,7 @@ io.on('connection', function (socket) {
       io.sockets.emit('send', data);
   });
 });
-server.listen(process.env.PORT+1);
+server.listen(23456);
 
 app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname,'public')));
