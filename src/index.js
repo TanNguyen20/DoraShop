@@ -1,4 +1,11 @@
 const express = require('express');
+const passport = require('passport');
+const session = require('express-session');
+const mongoose=require('mongoose');
+// const dotenv = require('dotenv');
+const MongoStore = require('connect-mongo');
+require('./config/passport')(passport);
+
 const path =require('path');
 const app = express();
 const route = require('./routes');
@@ -11,12 +18,27 @@ app.use(express.urlencoded({
   extended :true
 }));
 app.use(express.json());
-
 const port = process.env.PORT ||3000;
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 app.use(SortMiddleware);
 db.connect();
+
+
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ 
+      mongoUrl: 'mongodb://127.0.0.1:27017/quan_ly',
+    }),
+  })
+);
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(morgan('combined'));
 app.engine('handlebars', exphbs({
     helpers: ({
@@ -326,6 +348,7 @@ app.engine('handlebars', exphbs({
     })
     
 }));
+// const app1 = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 io.on('connection', function (socket) {
@@ -335,7 +358,7 @@ io.on('connection', function (socket) {
       io.sockets.emit('send', data);
   });
 });
-server.listen(23456);
+server.listen(34567);
 
 app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname,'public')));
