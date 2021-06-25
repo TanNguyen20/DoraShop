@@ -31,7 +31,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ 
-      mongoUrl: 'mongodb://127.0.0.1:27017/quan_ly',
+      mongoUrl: 'mongodb+srv://quanly:KgqntHXNLR3w1FgF@cluster0.onmys.mongodb.net/nienluan?retryWrites=true&w=majority',
     }),
   })
 );
@@ -358,7 +358,8 @@ io.on('connection', function (socket) {
       io.sockets.emit('send', data);
   });
 });
-server.listen(34567);
+var portSocket = process.env.PORT || 34567;
+server.listen(portSocket);
 
 app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname,'public')));
