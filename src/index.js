@@ -359,7 +359,7 @@ io.on('connection', function (socket) {
   });
 });
 
-server.listen(34567);
+server.listen(345678);
 
 app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname,'public')));
