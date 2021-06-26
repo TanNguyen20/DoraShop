@@ -1,6 +1,6 @@
 $(function () {
     //Kết nối tới server socket đang lắng nghe
-    var socket = io.connect('https://dorashopvn.herokuapp.com/:345678');
+    var socket = io.connect('http://doravnshop.herokuapp.com:345678');
 
     //Socket nhận data và append vào giao diện
     socket.on("send", function (data) {
