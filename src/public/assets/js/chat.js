@@ -1,7 +1,6 @@
 $(function () {
     //Kết nối tới server socket đang lắng nghe
-    var port = process.env.PORT||34567;
-    var socket = io.connect('http://nienluan2021.herokuapp.com/:'+port);
+    var socket = io.connect('http://nhattanecommerce.herokuapp.com');
 
     //Socket nhận data và append vào giao diện
     socket.on("send", function (data) {
