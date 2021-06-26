@@ -358,8 +358,8 @@ io.on('connection', function (socket) {
       io.sockets.emit('send', data);
   });
 });
-// var portSocket = process.env.PORT || 34567;
-server.listen(process.env.PORT);
+
+server.listen(34567);
 
 app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname,'public')));
