@@ -349,8 +349,17 @@ app.engine('handlebars', exphbs({
     
 }));
 // const app1 = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+
+
+
+app.set('view engine', 'handlebars');
+app.use(express.static(path.join(__dirname,'public')));
+app.set('views', path.join(__dirname, 'resources','view'));
+const mainServer = app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`);
+})
+// const server = require('http').createServer(app);
+const io = require('socket.io')(mainServer);
 io.on('connection', function (socket) {
   console.log('...........................Welcome to server chat.......................................');
 
@@ -361,14 +370,5 @@ io.on('connection', function (socket) {
     console.log(data);
   });
 });
-
-server.listen(port);
-
-app.set('view engine', 'handlebars');
-app.use(express.static(path.join(__dirname,'public')));
-app.set('views', path.join(__dirname, 'resources','view'));
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-})
 app.use(cookieParser('mk'));// neu khong co ma secret se khong the lay duoc cookie thong qua req.cookies
 route(app);
