@@ -1,3 +1,11 @@
+@media (min-width:1023px){
+    .hiden-on-laptop{
+      display:none;
+    }
+    .show-on-laptop{
+      display: block;
+    }
+  }
 /* mobile and tablet */
 
 @media (max-width:1023px){

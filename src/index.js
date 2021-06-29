@@ -357,6 +357,9 @@ io.on('connection', function (socket) {
   socket.on('send', function (data) {
       io.sockets.emit('send', data);
   });
+  socket.on("message", data => {
+    console.log(data);
+  });
 });
 
 server.listen(port);

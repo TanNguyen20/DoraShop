@@ -2,6 +2,9 @@
   .hiden-on-laptop{
     display:none;
   }
+  .show-on-laptop{
+    display: block;
+  }
 }
 @media (max-width: 330px){
   .btn {

@@ -8,10 +8,10 @@ async function connect(){
             useUnifiedTopology: true,
             useCreateIndex: true,
         });
-        console.log("Ket noi thanh cong !!!")
+        console.log("Ket noi database thanh cong !!!")
     }
     catch(error){
-        console.log("Ket noi khong thanh cong !!!")
+        console.log("Ket noi database khong thanh cong !!!")
     }
 }
 module.exports ={ connect };

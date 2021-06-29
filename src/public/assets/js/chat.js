@@ -1,11 +1,11 @@
 $(function () {
     //Kết nối tới server socket đang lắng nghe
-    var socket = io.connect('http://doravnshop.herokuapp.com');
+    var socket = io.connect('http://localhost:34567');
 
     //Socket nhận data và append vào giao diện
     socket.on("send", function (data) {
         console.log(data);
-        $("#content").append("<p class='message'>" + data.username + ": " + data.message + "</p>")
+        $("#content").append("<p class='message__container'>" + data.username + ": "+"<span class='content-message'>" + data.message + "</span>"+"</p>")
     })
 
     //Bắt sự kiện click gửi message

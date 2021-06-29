@@ -8,20 +8,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js" integrity="sha512-iZIBSs+gDyTH0ZhUem9eQ1t4DcEn2B9lHxfRMeGQhyNdSUz+rb+5A3ummX6DQTOIs1XK0gOteOg/LPtSo9VJ+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="/assets/js/chat.js"></script>
+    <link rel="stylesheet" href="/css/fontawesome-free-5.15.2/css/all.min.css">
+
 </head>
 
 <body>
 
-<fieldset>
-    <legend>Demo chat realtime NodeJS</legend>
-    <input type="text" id="username" name="username" placeholder="Enter name">
-    <br>
+<input type="text" id="username" name="username" placeholder="Enter name">
+<br>
+<div class="app__container">
     <div id="content"></div>
+    <div class="message-bar">
+        <input id="message" placeholder="Write something..">
+        <button id="sendMessage"><i class="far fa-paper-plane icon-send"></i></button>
+    </div>
+    
+</div>
 
-    <input id="message" placeholder="Write something..">
-    <br>
-    <button id="sendMessage">SEND</button>
-</fieldset>
 
 </body>
 </html>
