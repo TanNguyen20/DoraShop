@@ -1,4 +1,4 @@
-@media (min-width:1023px){
+@media (min-width:1024px){
     .hiden-on-laptop{
       display:none;
     }
@@ -9,6 +9,34 @@
 /* mobile and tablet */
 
 @media (max-width:1023px){
+    #username-socket{
+        margin-left:20px;
+        width:50%;
+        height:35px;
+    }
+    #message{
+        height:40px;
+        width:70%;
+    }
+    #sendMessage{
+        font-size: 30px;
+        width: 55px;
+        height: 45px;
+    }
+    .app__container-socket{
+        width: 100%;
+        height: 400px;
+    }
+    .wrap-socket{
+        position:absolute;
+        left:20px;
+        right:20px;
+    }
+    #content-socket{
+        width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+    }
     :root{
         --header-height:70px;
         --navbar-height:0px;

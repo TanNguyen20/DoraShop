@@ -4,7 +4,8 @@
     <title>Chat realtime NodeJS demo</title>
 
     <link rel="stylesheet" href="/assets/css/socket.css">
-
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js" integrity="sha512-iZIBSs+gDyTH0ZhUem9eQ1t4DcEn2B9lHxfRMeGQhyNdSUz+rb+5A3ummX6DQTOIs1XK0gOteOg/LPtSo9VJ+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="/assets/js/chat.js"></script>
@@ -14,17 +15,16 @@
 
 <body>
 
-<input type="text" id="username" name="username" placeholder="Enter name">
+<input type="text" id="username-socket" name="username" placeholder="Enter name">
 <br>
-<div class="app__container">
-    <div id="content"></div>
-    <div class="message-bar">
-        <input id="message" placeholder="Write something..">
-        <button id="sendMessage"><i class="far fa-paper-plane icon-send"></i></button>
+<div class="app__container-socket">
+    <div class="wrap-socket">
+        <div id="content-socket"></div>
+        <div class="message-bar">
+            <input id="message" placeholder="Write something..">
+            <button id="sendMessage"><i class="far fa-paper-plane icon-send"></i></button>
+        </div>
     </div>
-    
 </div>
-
-
 </body>
 </html>

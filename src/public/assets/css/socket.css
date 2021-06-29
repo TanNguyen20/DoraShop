@@ -1,17 +1,14 @@
-#content {
-    border: 1px solid darkgrey;
-    width: 400px;
-    height: 300px;
+#content-socket {
+    border: 1px solid #a9a9a9;
     padding: 10px;
     overflow-y: scroll;
     background-color: rgba(47, 189, 255, 0.3);
+    border: 2px solid violet;
+    border-radius: 6px;
+    height:300px;
 }
 ::-webkit-scrollbar {
     display: none;
-}
-#content{
-    border: 2px solid violet;
-    border-radius: 6px;
 }
 .icon-send{
     color:white;
@@ -50,10 +47,14 @@
     color:white;
     background-color:orangered;
 }
-.app__container{
+.app__container-socket{
     position: relative;
     width: 420px;
 }
-#username, #content, #message, #sendMessage {
+#username-socket{
+    border-radius: 4px;
+    border: 2px solid black;
+}
+#username-socket, #content, #message, #sendMessage {
     margin-bottom: 5px;
 }
