@@ -1,0 +1,15 @@
+---
+application:
+  name: "dorashop"
+  project: "Dorashop"
+  organization: "QoveryCommunity"
+databases:
+- type: "MONGODB"
+  name: "nienluan"
+  version: "4.4"
+routers:
+- name: "main-dorashop"
+  routes:
+  - application_name: "dorashop"
+    paths:
+    - "/*"
