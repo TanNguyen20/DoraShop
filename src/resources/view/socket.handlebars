@@ -15,16 +15,25 @@
 
 <body>
 
-<input type="text" id="username-socket" name="username" placeholder="Enter name">
+<input type="text" id="username-socket" name="username" value="{{username}}" hidden>
 <br>
 <div class="app__container-socket">
     <div class="wrap-socket">
         <div id="content-socket"></div>
         <div class="message-bar">
-            <input id="message" placeholder="Write something..">
+            <textarea id="message" cols="30" rows="10" placeholder="Write some thing..."></textarea>
+            {{!-- <input id="message" placeholder="Write something.."> --}}
             <button id="sendMessage"><i class="far fa-paper-plane icon-send"></i></button>
         </div>
     </div>
 </div>
 </body>
+<script>
+    $("textarea").each(function () {
+        this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+    }).on("input", function () {
+        this.style.height = "40px";
+        this.style.height = (this.scrollHeight) + "px";
+    });
+</script>
 </html>

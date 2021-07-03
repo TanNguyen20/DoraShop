@@ -17,7 +17,24 @@ class SiteController{
 
     //
     sockets(req,res,next){
-        res.render('socket');
+        if(req.cookies.token){
+            var token = req.cookies.token;
+            var result = jwt.verify(token,'mk');
+            // res.json(result);
+            if(result){
+                Account.findOne({_id: result._id})
+                .then(data=>{
+                    res.render('socket',{
+                        username: data.username
+                    })
+                })
+                
+            }
+        }
+        else{
+            res.redirect('/user/Login');
+        }
+       
     }
     //
     addproduct(req, res, next){

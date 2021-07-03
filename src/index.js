@@ -5,7 +5,8 @@ const mongoose=require('mongoose');
 // const dotenv = require('dotenv');
 const MongoStore = require('connect-mongo');
 require('./config/passport')(passport);
-
+// import collection
+const message = require('./app/models/messages');
 const path =require('path');
 const app = express();
 const route = require('./routes');
@@ -360,15 +361,39 @@ const mainServer = app.listen(port, () => {
 })
 // const server = require('http').createServer(app);
 const io = require('socket.io')(mainServer);
-io.on('connection', function (socket) {
-  console.log('...........................Welcome to server chat.......................................');
-
-  socket.on('send', function (data) {
-      io.sockets.emit('send', data);
-  });
-  socket.on("message", data => {
-    console.log(data);
-  });
+io.of("/").adapter.on("join-room", (room, id) => {
+  console.log(`socket ${id} has joined room ${room}`);
 });
+io.on('connection', function (socket) {
+
+  console.log(`...........................Welcome socket ${socket.id}...........................`);
+  socket.on("disconnect", (reason) => {
+    console.log(`...........................Socket ${socket.id} exit because ${reason}...........................`);
+  });
+  //luu vao db
+  var from = "";
+  var content = "";
+  var to="";
+  socket.on('receiver',(data)=>{
+    var  messageSave= new message(data);
+    messageSave.save()
+    .then(()=>{
+      console.log("Created message and save into database!!!")
+    })
+    .catch((err)=>{
+      console.log("Co loi xay ra, thong tin loi: "+ err);
+    })
+  })
+  socket.on('send', function (data) {
+    
+    // console.log(data.message+"........................");
+    io.sockets.emit('send', data);//gui data qua socket
+  });
+  // socket.on("someevent", (data) => {// someevent =  send
+  //   console.log(data.username+"#....................");
+  //   io.sockets.emit('someevent', data);//gui data di
+  // });
+});
+
 app.use(cookieParser('mk'));// neu khong co ma secret se khong the lay duoc cookie thong qua req.cookies
 route(app);
