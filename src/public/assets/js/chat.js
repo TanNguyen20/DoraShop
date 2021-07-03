@@ -6,10 +6,10 @@ $(function () {
         var username = $('#username-socket').val();
         var objMessage={};
         if(username==data.username){
-            $("#content-socket").append("<p class='message__container'>" + "<span class='content-message' style='background-color:blue;'>" + data.message + "</span> :Bạn"+"</p>"+"<br>");
+            $("#content-socket").append("<p class='message__container'>" + "<span class='content-message' style='background-color:blue;'>" + data.message + "</span> :Bạn"+"</p><br>");
         }
         else {
-            $("#content-socket").append("<p class='message__container'>" + data.username + ": "+"<span class='content-message'>" + data.message + "</span>"+"</p>");
+            $("#content-socket").append("<p class='message__container-1'>" + data.username + ": "+"<span class='content-message-1'>" + data.message + "</span>"+"</p><br>");
             var usernameReceive = $('#username-socket').val();
             objMessage.from=data.username;
             objMessage.to=usernameReceive;

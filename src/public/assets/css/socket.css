@@ -35,6 +35,11 @@
     display:flex;
     justify-content: flex-end;
 }
+.message__container-1{
+    margin: 0 4px;
+    margin-bottom: -8px;
+    display:flex;
+}
 .message-bar{
     padding-top: 5px;
     position: absolute;
@@ -43,6 +48,15 @@
     margin: 6px 0;
 }
 .content-message{
+    word-break: break-word;
+    border-radius: 20px;
+    border:2px solid rgba(228,128,100,0.1);
+    padding: 6px;
+    color:white;
+    background-color:orangered;
+    display: block;
+}
+.content-message-1{
     word-break: break-word;
     border-radius: 20px;
     border:2px solid rgba(228,128,100,0.1);
