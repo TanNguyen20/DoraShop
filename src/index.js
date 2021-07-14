@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongo');
 require('./config/passport')(passport);
 // import collection
 const message = require('./app/models/messages');
+const notification = require('./app/models/notification');
 const path =require('path');
 const app = express();
 const route = require('./routes');
@@ -346,6 +347,55 @@ app.engine('handlebars', exphbs({
       checkValueSelected:(val,valueInSelectOption)=>{
         if(val==valueInSelectOption) return `selected`;
       },
+      renderNotificationInHeaderCustomer: (notify)=>{
+        var strNotify =``;
+        if(notify.typeNotification=='tin nhắn') {
+          if(notify.from=='admin') strNotify+= `<i class="fas fa-envelope" style="font-size:40px;"></i>
+          <div class="header__notify-info">
+            <span class="header__notify-name">Bạn có một tin nhắn từ cửa hàng</span>
+            <span class="header__notify-description">Bấm vào để xem chi tiết tin nhắn từ cửa hàng</span>
+          </div>`;
+        }
+        else{
+          if(notify.from =='admin') strNotify+= `<i class="fas fa-box" style="font-size:40px;"></i>
+          <div class="header__notify-info">
+          <span class="header__notify-name">Bạn có một thông báo mới về đơn hàng từ cửa hàng</span>
+          <span class="header__notify-description">Bấm vào để xem chi tiết thông báo</span>
+          </div>`;
+        }
+        return strNotify;
+      },
+      renderNotificationInHeaderAdmin: (notify)=>{
+        var strNotify =``;
+        if(notify.typeNotification=='tin nhắn') {
+          if(notify.from!='admin') strNotify+= `<i class="fas fa-envelope" style="font-size:40px;"></i>
+          <div class="header__notify-info">
+            <span class="header__notify-name">Bạn có một tin nhắn từ khách hàng ${notify.from}</span>
+            <span class="header__notify-description">Bấm vào để xem chi tiết tin nhắn từ khách hàng này</span>
+          </div>`;
+        }
+        else{
+          if(notify.from !='admin') strNotify+= `<i class="fas fa-box" style="font-size:40px;"></i>
+          <div class="header__notify-info">
+          <span class="header__notify-name">Bạn có một thông báo mới về đơn hàng từ khách hàng</span>
+          <span class="header__notify-description">Bấm vào để xem chi tiết thông báo</span>
+          </div>`;
+        }
+        return strNotify;
+      },
+      renderMessages: (mess,username)=>{
+        var strMess='';
+        for(var i=0;i<mess.length;i++){
+          if(mess[i].from==username){
+            strMess+=`<p class='message__container'>
+            <span class='content-message' style='background-color:blue;'> ${mess[i].content}</span> :Bạn</p><br>`;
+          }
+          else{
+            strMess+=`<p class='message__container-1'>${mess[i].from}: <span class='content-message-1'> ${mess[i].content} </span></p><br>`;
+          }
+        }
+        return strMess;
+      }
     })
     
 }));
@@ -365,7 +415,11 @@ io.of("/").adapter.on("join-room", (room, id) => {
   console.log(`socket ${id} has joined room ${room}`);
 });
 io.on('connection', function (socket) {
+  console.log(cookieParser.signedCookie('j%3A%22607be119e658ffa88fc4bfb8%22', 'mk')+"......nn...");
 
+  socket.on('joinroom',(data)=>{
+    console.log(data+".........");
+  });
   console.log(`...........................Welcome socket ${socket.id}...........................`);
   socket.on("disconnect", (reason) => {
     console.log(`...........................Socket ${socket.id} exit because ${reason}...........................`);
@@ -375,6 +429,24 @@ io.on('connection', function (socket) {
   var content = "";
   var to="";
   socket.on('receiver',(data)=>{
+    // console.log(JSON.stringify(data)+'....');
+    if(data.from!='admin') {
+      data.to='admin';
+      var notify={};
+      notify.from = data.from;
+      notify.to = 'admin';
+      notify.typeNotification ='tin nhắn';
+      var notificationSave = new notification(notify);
+      notificationSave.save()
+      .then(()=>{
+        console.log('Created notify sucess!!!');
+      })
+      .catch((err)=>{
+        console.log('Co loi xay ra trong khi tao thong bao, thong tin loi: '+err);
+      })
+    }
+    console.log(JSON.stringify(data)+'....');
+
     var  messageSave= new message(data);
     messageSave.save()
     .then(()=>{

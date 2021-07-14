@@ -1,5 +1,7 @@
 const Product = require('../models/product');
 const Account = require('../models/account');
+const Notification = require('../models/notification');
+const Messages = require('../models/messages');
 const History = require('../models/historyfind');
 const {mulMgToObject, mongooseToObject} = require('../../util/mongo');
 const jwt = require('jsonwebtoken');//quan trong
@@ -16,19 +18,33 @@ class SiteController{
     // }
 
     //
-    sockets(req,res,next){
+    async checkuser(req,res,next){
+        if(req.cookies.userid){
+            var user = await Account.findOne({_id: req.cookies.userid});
+            if(user.username==req.params.userreceive || user.username=='admin') next();
+            else res.json('Bạn không thể xem nội dung tin nhắn của người khác!!!')
+        }
+        else res.redirect('/user/Login')
+    }
+    async sockets(req,res,next){
         if(req.cookies.token){
             var token = req.cookies.token;
             var result = jwt.verify(token,'mk');
             // res.json(result);
             if(result){
-                Account.findOne({_id: result._id})
-                .then(data=>{
+                try {
+                    var acc = await Account.findOne({_id: result._id});
+                    var mess = await Messages.find({$or: [{from: acc.username,to: 'admin'},{from: 'admin', to: acc.username},{from: req.params.userreceive,to: 'admin'},{from: 'admin', to: req.params.userreceive}]}).sort({createdAt:'asc'});
+                    // res.json(req.params.userreceive);
                     res.render('socket',{
-                        username: data.username
+                        username: acc.username,
+                        mess: mulMgToObject(mess),
                     })
-                })
+                } catch (error) {
+                    res.json('Khong tim thay tin nhan');
+                }
                 
+
             }
         }
         else{
@@ -184,10 +200,11 @@ class SiteController{
             .catch(next);
     }
 
-    privateUser(req, res, next){
+    async privateUser(req, res, next){
         var token = req.cookies.token;
         var result = jwt.verify(token,'mk');
-        
+        var notify = await Notification.find().sort({updatedAt:1}).limit(4);
+        // res.json(notify);
         Account.findOne({ _id: result._id })
         .populate('cart._id')
         .then(account =>{
@@ -238,13 +255,16 @@ class SiteController{
                                 else arrayHistory=data.historycontent.slice(data.historycontent.length-3,data.historycontent.length);
                             }
                             res.render('private',{
+
                                 product:mulMgToObject(product),
+                                notification: mulMgToObject(notify),
                                 countProduct: totalpage,
                                 nextpage,
                                 priviouspage,
                                 historydata: arrayHistory,
                                 accountname: account.username,
                                 cart: newCart,
+
                             })
                         })
                         

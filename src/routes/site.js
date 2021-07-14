@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const sitecontroller = require('../app/controllers/SiteController');
 router.get('/search',sitecontroller.search);
-router.get('/sockets',sitecontroller.sockets);
+router.get('/sockets/:userreceive',sitecontroller.checkuser,sitecontroller.sockets);
 router.post('/product/:productid',sitecontroller.addproduct);
 router.get('/cart',sitecontroller.cart);
 router.post('/deleteproduct/:idslug',sitecontroller.deleteproduct);

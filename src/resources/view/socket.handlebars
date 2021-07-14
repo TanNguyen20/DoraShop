@@ -19,7 +19,9 @@
 <br>
 <div class="app__container-socket">
     <div class="wrap-socket">
-        <div id="content-socket"></div>
+        <div id="content-socket">
+            {{{renderMessages mess username}}}   
+        </div>
         <div class="message-bar">
             <textarea id="message" cols="30" rows="10" placeholder="Write some thing..."></textarea>
             {{!-- <input id="message" placeholder="Write something.."> --}}

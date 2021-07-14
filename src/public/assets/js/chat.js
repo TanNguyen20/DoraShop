@@ -2,6 +2,10 @@ $(function () {
     //Kết nối tới server socket đang lắng nghe
     var socket = io();
     //Socket nhận data và append vào giao diện
+    socket.on("connect", () => {
+        // console.log(socket.id);
+        socket.emit("joinroom",socket.id);
+      });
     socket.on("send", function (data) {
         var username = $('#username-socket').val();
         var objMessage={};
@@ -17,6 +21,7 @@ $(function () {
             // console.log(JSON.stringify(objMessage));
             socket.emit("receiver",objMessage);
         }
+        
     })
 
     //Bắt sự kiện click gửi message
@@ -25,21 +30,20 @@ $(function () {
         var username = $('#username-socket').val();
         var message = $('#message').val();
 
-        if (username == '' || message == '') {
-            alert('Please enter name and message!!');
+        if (message == '') {
+            alert('Please enter message!!');
         } else {
             //Gửi dữ liệu cho socket
             socket.emit('send', {username: username, message: message});
             $('#message').val('');
         }
     })
-    $("#message").on("keyup",function(event) {
+    $("#message").on('keyup',function(event) {
         if(event.which===13){
             var username = $('#username-socket').val();
             var message = $('#message').val();
-    
-            if (username == '' || message == '') {
-                alert('Please enter name and message!!');
+            if ( message == '\n' || message=='') {
+                alert('Please enter message!!');
             } else {
                 //Gửi dữ liệu cho socket
                 socket.emit('send', {username: username, message: message});

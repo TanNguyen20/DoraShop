@@ -1,5 +1,6 @@
 const express = require('express');
 const Account = require('../models/account');
+const Product = require('../models/product');
 const Order = require('../models/order');
 const {mongooseToObject, mulMgToObject} = require('../../util/mongo');
 const jwt = require('jsonwebtoken');
@@ -454,7 +455,7 @@ class UsersController{
     privateUser(req, res, next){
         res.render('private');
     }
-    testtoken(req, res, next){
+    async testtoken(req, res, next){
         try {
             var token = req.cookies.token;
             var result = jwt.verify(token,'mk');// result tra ve chinh la _id duoc truyen vao luc tao token
@@ -462,9 +463,15 @@ class UsersController{
             
             if(result){
                 var decoded = jwt.decode(token, {complete: true});
+                var products = await Product.find({});
                 Account.findOne({ _id: result._id })
+                .populate('cart._id')
                 .then(account =>{
-                    res.render('private',{accountname: account.username});
+                    res.render('private',{
+                        product: mulMgToObject(products),
+                        accountname: account.username,
+                        cart: account.cart,
+                    });
                 })
                 .catch(err =>{
                     res.json('Không tìm thấy tài khoan đi kèm token này');

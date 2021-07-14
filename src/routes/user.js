@@ -8,7 +8,7 @@ router.get('/myorderswaitconfirm',userscontroller.myordersstatus1);
 router.get('/myordersfinished',userscontroller.myordersstatus2);
 router.post('/changeaddress',userscontroller.changeaddress);
 router.post('/changepassword',userscontroller.changepassword);
-router.get('/private',userscontroller.testtoken,userscontroller.privateUser);
+router.get('/private',userscontroller.testtoken,/*userscontroller.privateUser*/);
 router.get('/Login',userscontroller.login);
 router.get('/information',userscontroller.information);
 router.get('/password',userscontroller.password);

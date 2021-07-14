@@ -23,42 +23,14 @@
                             <h3>Thông báo mới nhận</h3>
                         </header>
                         <ul class="header__notify-list">
+                            {{#each notification}}
                             <li class="header__notify-item header__notify-item--viewed">
-                                <a href="" class="header__notify-link">
-                                    <img src="https://cdn.tgdd.vn/Products/Images/42/228738/iphone-12-pro-xam-new-600x600-600x600.jpg" alt="" class="header__notify-img">
-                                    <div class="header__notify-info">
-                                        <span class="header__notify-name">Điện thoại chính hãng</span>
-                                        <span class="header__notify-description">Mô tả điện thoại chính hãng,hàng chính hãng cứ yên tâm nhé mọi người</span>
-                                    </div>
+                                <a href="/sockets/{{this.from}}" class="header__notify-link">
+                                    {{!-- <img src="https://cdn.tgdd.vn/Products/Images/42/228738/iphone-12-pro-xam-new-600x600-600x600.jpg" alt="" class="header__notify-img"> --}}
+                                    {{{renderNotificationInHeaderCustomer this}}}
                                 </a>
                             </li>
-                            <li class="header__notify-item">
-                                <a href="" class="header__notify-link">
-                                    <img src="https://cdn.tgdd.vn/Products/Images/42/228738/iphone-12-pro-xam-new-600x600-600x600.jpg" alt="" class="header__notify-img">
-                                    <div class="header__notify-info">
-                                        <span class="header__notify-name">Điện thoại chính hãng</span>
-                                        <span class="header__notify-description">Mô tả điện thoại chính hãng</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="header__notify-item">
-                                <a href="" class="header__notify-link">
-                                    <img src="https://cdn.tgdd.vn/Products/Images/42/228738/iphone-12-pro-xam-new-600x600-600x600.jpg" alt="" class="header__notify-img">
-                                    <div class="header__notify-info">
-                                        <span class="header__notify-name">Điện thoại chính hãng</span>
-                                        <span class="header__notify-description">Mô tả điện thoại chính hãng</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="header__notify-item">
-                                <a href="" class="header__notify-link">
-                                    <img src="https://cdn.tgdd.vn/Products/Images/42/228738/iphone-12-pro-xam-new-600x600-600x600.jpg" alt="" class="header__notify-img">
-                                    <div class="header__notify-info">
-                                        <span class="header__notify-name">Điện thoại chính hãng</span>
-                                        <span class="header__notify-description">Mô tả điện thoại chính hãng</span>
-                                    </div>
-                                </a>
-                            </li>
+                            {{/each}}
                         </ul>
                         <footer class="header__notify-footer">
                             <a href="" class="header__notify-footer-btn">Xem tất cả</a>
