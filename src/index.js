@@ -411,8 +411,11 @@ const mainServer = app.listen(port, () => {
 })
 // const server = require('http').createServer(app);
 const io = require('socket.io')(mainServer);
+
 io.of("/").adapter.on("join-room", (room, id) => {
   console.log(`socket ${id} has joined room ${room}`);
+  const roomSize = io.of("/").adapter.rooms.get(room)
+  console.log(`room size: ${roomSize.size}`);
 });
 io.on('connection', function (socket) {
   console.log(cookieParser.signedCookie('j%3A%22607be119e658ffa88fc4bfb8%22', 'mk')+"......nn...");

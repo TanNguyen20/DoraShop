@@ -47,8 +47,11 @@
                                         
                                     </div>
                                     <div class="auth-form__controls">
-                                        <button class="btn auth-form__controls-back">TRỞ LẠI</button>
-                                        <button class="btn btn--primary" >ĐĂNG NHẬP</button>
+                                        {{!-- tyoe =button khi nhan enter se khong submit
+                                        type bang submit co the khong co cung duoc 
+                                        khi do button ( button dau tien tu tren xuong) khong co tyoe se duoc set hanh vi mac dinh la submit--}}
+                                        <button class="btn auth-form__controls-back" type="button">TRỞ LẠI</button>
+                                        <button class="btn btn--primary" type="submit" >ĐĂNG NHẬP</button>
                                     </div>
                                 </div>
                                 <div class="auth-form__socials">
@@ -76,9 +79,9 @@
 <script src="/validatior.js"></script>
 <script>
     var form = new Validator("#login-form");
-    $('.auth-form__controls-back').click(function(e){
+     $('.auth-form__controls-back').click(function(e){
         e.preventDefault();
         window.location='/';
-    })
+    });
 </script>
 </html>

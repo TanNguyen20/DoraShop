@@ -31,6 +31,7 @@
 </div>
 </body>
 <script>
+    $("#content-socket").scrollTop($("#content-socket")[0].scrollHeight);
     $("textarea").each(function () {
         this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
     }).on("input", function () {
