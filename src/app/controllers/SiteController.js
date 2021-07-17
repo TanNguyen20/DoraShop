@@ -705,6 +705,50 @@ class SiteController{
         })
         .catch(next);
     }
+    bestseller(req, res, next){
+        var numsort=parseInt(req.body.pricessort);
+        if(numsort===0) res.redirect('/');
+        else{
+            Product.find({buyNumProduct: {$gt: 0}})
+            .sort({ buyNumProduct: 'desc' })
+            .then(product=>{
+                var token = req.cookies.token;
+                // res.json(token);
+                if(token){
+                    var result = jwt.verify(token,'mk');
+                    Account.findOne({_id: result._id})
+                    .populate('cart._id')
+                    .then(account=>{
+                        History.findOne({_id: result._id})
+                        .then(his=>{
+                            var arrayHistory = [];
+                            if(his){
+                                if(his.historycontent.length<=3) arrayHistory=his.historycontent;
+                                else arrayHistory=his.historycontent.slice(his.historycontent.length-3,his.historycontent.length);
+                            }
+                            
+                            // res.json(account.username);
+                            // res.json(arrayHistory);
+                            res.render('private',{
+                                product:mulMgToObject(product),
+                                accountname: account.username,
+                                historydata: arrayHistory,
+                                cart: account.cart,
+                            });
+                        })
+                    })
+                }
+                else{
+                    res.render('home',{
+                        product:mulMgToObject(product),
+                    })
+                }
+                
+
+            })
+            .catch(next);
+        }
+    }
     sortprice(req, res, next){
         var numsort=parseInt(req.body.pricessort);
         if(numsort===0) res.redirect('/');

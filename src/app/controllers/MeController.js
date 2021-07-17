@@ -383,14 +383,29 @@ class MeController{
         })
         
     }
-    changestatus2(req, res, next){
-        Order.updateOne({_id: req.params.idorder},{status:2})
-        .then(()=>{
+    async changestatus2(req, res, next){
+        try {
+            await Order.updateOne({_id: req.params.idorder},{status:2});
+            var productUpdateNumber = await Order.findOne({_id: req.params.idorder});
+            for(var i =0 ; i< productUpdateNumber.orderdetail.length;i++){
+                var productInfo = await Product.findOne({name: productUpdateNumber.orderdetail[i].nameproduct});
+                var count=0;
+                if(productInfo.buyNumProduct){
+                    count = productInfo.buyNumProduct + productUpdateNumber.orderdetail[i].amountproduct;
+                }
+                else{
+                    count = productUpdateNumber.orderdetail[i].amountproduct;
+                }
+                await Product.updateOne({name: productInfo.name},{
+                    buyNumProduct: count,
+                })
+            }
             res.redirect('back');
-        })
-        .catch(()=>{
-            res.json('co loi xay ra');
-        })
+        } catch (error) {
+            console.log("co loi khi cap nhat trang thai don hang hoac so luong duoc mua cua san pham, thong tin loi: "+error);
+        }
+        
+       
         
     }
     changestatusnegative2(req, res, next){

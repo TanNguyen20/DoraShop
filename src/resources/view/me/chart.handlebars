@@ -70,6 +70,18 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
     var arrayMonth = new Array({{pricesInMonth}});
+    var convert;
+    for(var i=0;i<12;i++){
+        convert = (arrayMonth[i]+'').split('.');
+        if(convert[1]){
+            if(convert[1].length>2){
+                arrayMonth[i] = Number(convert[0] + '.' + convert[1].substring(0,3));
+            }
+            else{
+                arrayMonth[i] = Number(convert[0] + '.' + convert[1]);
+            }
+        }
+    }
     const chart = Highcharts.chart('container', {
         title: {
             text: 'Doanh thu theo tháng'

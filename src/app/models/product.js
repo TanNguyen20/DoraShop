@@ -10,6 +10,7 @@ const productSchema = new Schema({
     image: { type: String, required: true },
     slug: { type: String, slug: 'name', unique: true },
     color:{type:Array },
+    buyNumProduct:{type:Number,default:0},
     typeProduct:{type: String,required:true}
 
     /*  slug ben trai co the thay bang bat ki chu gi vi no la key 

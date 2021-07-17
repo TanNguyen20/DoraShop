@@ -11,6 +11,7 @@ router.get('/phone',sitecontroller.phone);
 router.get('/laptop',sitecontroller.laptop);
 router.get('/accessories',sitecontroller.accessories);
 router.post('/sortprice',sitecontroller.sortprice);
+router.post('/bestseller',sitecontroller.bestseller);
 router.post('/latest',sitecontroller.latest);
 router.post('/sortname',sitecontroller.sortname);
 router.get('/',sitecontroller.testtoken,sitecontroller.privateUser);
