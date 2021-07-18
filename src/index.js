@@ -412,20 +412,19 @@ const mainServer = app.listen(port, () => {
 // const server = require('http').createServer(app);
 const io = require('socket.io')(mainServer);
 
-io.of("/").adapter.on("join-room", (room, id) => {
-  console.log(`socket ${id} has joined room ${room}`);
-  const roomSize = io.of("/").adapter.rooms.get(room)
-  console.log(`room size: ${roomSize.size}`);
-});
+// io.of("/").adapter.on("join-room", (room, id) => {
+//   console.log(`socket ${id} has joined room ${room}`);
+//   const roomSize = io.of("/").adapter.rooms.get(room)
+//   console.log(`room size: ${roomSize.size}`);
+// });
 io.on('connection', function (socket) {
-  console.log(cookieParser.signedCookie('j%3A%22607be119e658ffa88fc4bfb8%22', 'mk')+"......nn...");
-
-  socket.on('joinroom',(data)=>{
-    console.log(data+".........");
-  });
   console.log(`...........................Welcome socket ${socket.id}...........................`);
   socket.on("disconnect", (reason) => {
     console.log(`...........................Socket ${socket.id} exit because ${reason}...........................`);
+  });
+  socket.on('joinroom',(data)=>{
+    socket.join(data);
+    console.log(`...........................socket ${socket.id} has joined room ${data}...........................`);
   });
   //luu vao db
   var from = "";
@@ -449,7 +448,6 @@ io.on('connection', function (socket) {
       })
     }
     console.log(JSON.stringify(data)+'....');
-
     var  messageSave= new message(data);
     messageSave.save()
     .then(()=>{
@@ -460,8 +458,9 @@ io.on('connection', function (socket) {
     })
   })
   socket.on('send', function (data) {
-    
-    // console.log(data.message+"........................");
+    const roomSize = io.of("/").adapter.rooms.get(data.usernameUrl);
+    data.size = roomSize.size;
+    console.log(`...........................room size: ${roomSize.size}...........................`);
     io.sockets.emit('send', data);//gui data qua socket
   });
   // socket.on("someevent", (data) => {// someevent =  send
