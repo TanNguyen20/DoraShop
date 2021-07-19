@@ -162,6 +162,9 @@
 
 /* mobile display */
 @media (max-width:739px){
+    .header__logo-img{
+        height: 58px;
+    }
     .hiden-on-mobile{
         display:none;
     }
@@ -170,6 +173,7 @@
     }
     .header__cart,
     .header__logo{
+        height:50px;
         width:unset;
     }
     .header__mobile-search{

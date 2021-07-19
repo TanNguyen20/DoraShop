@@ -117,6 +117,9 @@
 
 /* mobile display */
 @media (max-width: 739px) {
+  .header__logo-img{
+    height: 58px;
+  }
   .btn-save-address{
     width: 100%;
     margin-top: 16px;
