@@ -143,16 +143,31 @@
     })
     $('input.input-qty').on('change',function() {
         var amount = Number($(this).val());
+
         if(amount<1) amount=1;
         var $this = $(this);
+        var prices = $('.list-cart-item-price').text();
+        prices = Number(prices.replace(/[^0-9]/g,""));
+        result=prices*amount;
+        $('#totalprices').text('Tổng tiền: '+result.toLocaleString('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        }));
+        var result;
         var qty = $this.parent().find('.is-form');
         $(qty).on('click', function() {
             if ($(this).hasClass('minus')) {
                 if(amount>1) amount-=1;
+                result = (amount)*prices;
             } else if ($(this).hasClass('plus')) {
                 amount += 1;
+                result = (amount)*prices;
             }
-            $this.attr('value', amount).val(amount)
+            $('#totalprices').text('Tổng tiền: '+result.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }));
+            $this.attr('value', amount).val(amount);
         })
        
     })

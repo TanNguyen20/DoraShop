@@ -203,7 +203,7 @@ class SiteController{
     async privateUser(req, res, next){
         var token = req.cookies.token;
         var result = jwt.verify(token,'mk');
-        var notify = await Notification.find().sort({updatedAt:1}).limit(4);
+        var notify = await Notification.find({from:'admin'}).sort({updatedAt:1}).limit(4);
         // res.json(notify);
         Account.findOne({ _id: result._id })
         .populate('cart._id')
@@ -257,6 +257,7 @@ class SiteController{
                             res.render('private',{
 
                                 product:mulMgToObject(product),
+                                numMess: notify.length,
                                 notification: mulMgToObject(notify),
                                 countProduct: totalpage,
                                 nextpage,

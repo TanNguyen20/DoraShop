@@ -432,21 +432,18 @@ io.on('connection', function (socket) {
   var to="";
   socket.on('receiver',(data)=>{
     // console.log(JSON.stringify(data)+'....');
-    if(data.from!='admin') {
-      data.to='admin';
-      var notify={};
-      notify.from = data.from;
-      notify.to = 'admin';
-      notify.typeNotification ='tin nhắn';
-      var notificationSave = new notification(notify);
-      notificationSave.save()
-      .then(()=>{
-        console.log('Created notify sucess!!!');
-      })
-      .catch((err)=>{
-        console.log('Co loi xay ra trong khi tao thong bao, thong tin loi: '+err);
-      })
-    }
+    var notify={};
+    notify.from = data.from;
+    notify.to = data.to;
+    notify.typeNotification ='tin nhắn';
+    var notificationSave = new notification(notify);
+    notificationSave.save()
+    .then(()=>{
+      console.log('Created notify sucess!!!');
+    })
+    .catch((err)=>{
+      console.log('Co loi xay ra trong khi tao thong bao, thong tin loi: '+err);
+    })
     console.log(JSON.stringify(data)+'....');
     var  messageSave= new message(data);
     messageSave.save()
